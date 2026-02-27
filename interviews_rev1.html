@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voices — People & Stories</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --cream: #ede7d9;
+    --amber: #c8832a;
+    --amber-light: #e8a84a;
+    --muted: #7a6e61;
+    --line: #d4c9b8;
+    --card-bg: #faf7f2;
+    --shadow: 0 4px 32px rgba(26,20,16,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 72px 24px 48px;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 2px;
+    background: var(--amber);
+    margin: 32px auto 0;
+  }
+
+  .site-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 80px);
+    line-height: 1.05;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .site-title em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .site-subtitle {
+    margin-top: 16px;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+  }
+
+  /* GRID */
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, auto));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* PERSON CARD */
+  .person-card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .person-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(26,20,16,0.15);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .person-card:nth-child(1) { animation-delay: 0.05s; }
+  .person-card:nth-child(2) { animation-delay: 0.10s; }
+  .person-card:nth-child(3) { animation-delay: 0.15s; }
+  .person-card:nth-child(4) { animation-delay: 0.20s; }
+  .person-card:nth-child(5) { animation-delay: 0.25s; }
+  .person-card:nth-child(6) { animation-delay: 0.30s; }
+  .person-card:nth-child(7) { animation-delay: 0.35s; }
+  .person-card:nth-child(8) { animation-delay: 0.40s; }
+
+  .person-header {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .avatar-wrap {
+    width: 100%;
+  }
+
+  .avatar {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+
+  .person-meta {
+    padding: 20px 24px 18px;
+  }
+
+  .person-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .person-role {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .person-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 2;
+    padding: 24px 24px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* ACCORDION */
+  .accordion-list {
+    list-style: none;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .accordion-item:last-child { border-bottom: none; }
+
+  .accordion-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px 28px;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: background 0.2s ease, color 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .accordion-trigger:hover {
+    background: var(--cream);
+    color: var(--amber);
+  }
+
+  .accordion-trigger.open {
+    background: var(--cream);
+    color: var(--amber);
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+    transition: transform 0.3s ease, color 0.2s ease;
+  }
+
+  .accordion-trigger.open .chevron {
+    transform: rotate(180deg);
+    color: var(--amber);
+  }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .accordion-panel.open {
+    max-height: 850px;
+  }
+
+  .panel-inner {
+    padding: 0 28px 24px;
+    background: var(--cream);
+  }
+
+  /* AUDIO PLAYER */
+  .audio-section {
+    padding-top: 20px;
+    margin-bottom: 18px;
+  }
+
+  .audio-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .custom-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 40px;
+    padding: 10px 16px;
+  }
+
+  .play-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .play-btn:hover { background: var(--amber-light); }
+  .play-btn:active { transform: scale(0.95); }
+
+  .play-btn svg { color: white; }
+
+  .player-track { flex: 1; min-width: 0; }
+
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--amber);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+    pointer-events: none;
+  }
+
+  .player-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .no-audio-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    padding: 12px 0 4px;
+  }
+
+  /* TRANSCRIPT */
+  .transcript-section {}
+
+  .transcript-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .transcript-text {
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 600px) {
+    .people-grid { grid-template-columns: 1fr; gap: 20px; padding: 16px 16px 60px; }
+    .accordion-trigger { padding: 14px 20px; }
+    .panel-inner { padding: 0 20px 20px; }
+    .person-meta { padding: 16px 20px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="site-eyebrow">Audio Interviews</p>
+  <h1 class="site-title">Eight <em>Voices</em></h1>
+  <p class="site-subtitle">Conversations with remarkable people. Click any question to hear their response and read the full transcript.</p>
+</header>
+
+<main>
+  <div class="people-grid" id="grid"></div>
+</main>
+
+
+<script>
+const people = [
+  {
+    name: "Robert Cummings",
+    role: "Professor, Administrator, Skeptic",
+    color: "#2e6e8e",
+    initials: "RC",
+    avatarUrl: "images/cummings.png",
+    quote: "I'm long on writing.",
+    questions: [
+      {
+        q: "Can you reflect on the rise of AI and how it has affected your practice?",
+        audio: "audio/cummings/1.mp3",
+        transcript: "The first thing I would lead with is that generative AI represents a fundamental shift in literacy, which our brains cannot really adapt to as far as I can understand. So prior to the development of generative AI, in a very general sense, we could assume that text was written by humans. Maybe one, maybe multiple, maybe humans we knew, maybe humans we didn't, maybe humans we trusted, maybe humans we didn't, but we always had the assumption that text was generated by humans. Now some people poked around at that. Maybe there's some exceptions, but that's how our brains are trained. And as of November 2022, you could maybe argue the difference different dates. That's that's shifted, and our brains don't shift. How does that follow on? What does that mean? I think we're just all in the process of living through this uninformed consent, nonconsensual research project. That's the first thing that I think about with the development of generative AI. It's a rapid literacy shift, and we don't really know where it's going. Second thing that I think about is the fact that generative AI has shifted largely in our lives from being a research technology to being a consumer technology. So we created it. You know? We did we, the academy, created generative AI with work on machine learning and neural networks. But it was then bought out, taken over, invested in I don't know exactly the right term to put into it, in capitalist enterprises. And those capitalist enterprises are very difficult to contain. So two things, literacy shift and then consumer technology. Those are the two big things I think about."
+      },
+      {
+        q: "What are your thoughts about GenAI in the writing classroom?",
+        audio: "audio/cummings/2.mp3",
+        transcript: "So what I find is that I thought of generative AI as enhanced search, and that was generally my first strategy at addressing generative AI in the writing classroom. It's sort of like, well, I'm gonna treat it like a really big Google box, that we can use and and deepen search and queries that would feed into our writing projects. Turns out is, you know, back to those comments I made earlier about it being a consumer technology. It's just very difficult to contain that it's everywhere all the time, and that it's on everyone's phone for just about every possible use imaginable. It's been inserted into all of our campus technologies for sure. And so this idea that we could engage it in the writing classroom as if it were the first time we're ever used in sort of like a positivistic or experimental approach is just flawed. But I also don't have a replacement, like, to generate space for critical reflection on the use of it and the purpose of using it and the outputs. So until I have a better idea or someone give me a better method for it, that's my best effort at articul or at integrating it into my writing classroom."
+      },
+      {
+        q: "What is something faculty and WPAs can do to reckon together with GenAI as an evolving technology?",
+        audio: "audio/cummings/3.mp3",
+        transcript: "It has fundamentally reshaped our priorities. A decade ago I was studying coral biodiversity — cataloguing species, mapping distributions. Now almost every project has a conservation urgency to it. We're documenting species before we lose them. We're trialling coral restoration at scale. The science has become both more exciting and more heartbreaking at the same time."
+      },
+      {
+        q: "What are some accordances and limitations of GenAI for students?",
+        audio: "audio/cummings/4.mp3",
+        transcript: "That it regulates everything. Your weather, the air you breathe, the food chains that feed billions of people. People think of the ocean as a place you visit on holiday. But it is the engine of this planet. When it changes — and it is changing — nothing is insulated from that. The ocean is not a backdrop. It is the main story."
+      }
+    ]
+  },
+  {
+    name: "Sarah Campbell",
+    role: "Teacher, Enthusiast, Advocate",
+    color: "#6b4c8a",
+    initials: "SC",
+    avatarUrl: "images/campbell.png",
+    quote: "I think that if you use AI, don't use AI, or in between with AI, wherever you are, you're exactly where you're supposed to be.",
+    questions: [
+      {
+        q: "How has GenAI affected your teaching?",
+        audio: "audio/campbell/1.mp3",
+        transcript: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet, mauris ut cursus hendrerit, urna sapien hendrerit nunc, vel dignissim urna nunc non lorem. Suspendisse potenti. Nam finibus arcu a est scelerisque, in vulputate tortor finibus. Fusce cursus nec est a ullamcorper. Integer ac volutpat mi. Nulla facilisi. Sed tincidunt orci non mi pharetra, non tincidunt lacus egestas. In sed tellus nec risus placerat lacinia. Integer consectetur, enim at posuere fermentum, purus arcu pellentesque purus, sit amet aliquam nunc mi et sapien. Vestibulum sed lorem nisl. Mauris ac varius risus. Quisque cursus euismod nulla in varius. Aenean maximus, ipsum at accumsan dignissim, neque lectus faucibus risus, nec blandit turpis dui sit amet mi. Donec porttitor nunc non elit efficitur, vitae suscipit sapien malesuada."
+      },
+      {
+        q: "How are you experimenting with GenAI in your classroom?",
+        audio: "audio/campbell/2.mp3",
+        transcript: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet, mauris ut cursus hendrerit, urna sapien hendrerit nunc, vel dignissim urna nunc non lorem. Suspendisse potenti. Nam finibus arcu a est scelerisque, in vulputate tortor finibus. Fusce cursus nec est a ullamcorper. Integer ac volutpat mi. Nulla facilisi. Sed tincidunt orci non mi pharetra, non tincidunt lacus egestas. In sed tellus nec risus placerat lacinia. Integer consectetur, enim at posuere fermentum, purus arcu pellentesque purus, sit amet aliquam nunc mi et sapien. Vestibulum sed lorem nisl. Mauris ac varius risus. Quisque cursus euismod nulla in varius. Aenean maximus, ipsum at accumsan dignissim, neque lectus faucibus risus, nec blandit turpis dui sit amet mi. Donec porttitor nunc non elit efficitur, vitae suscipit sapien malesuada."
+      },
+      {
+        q: "On a granular level, how is GenAI changing the writing classroom?",
+        audio: "audio/campbell/3.mp3",
+        transcript: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet, mauris ut cursus hendrerit, urna sapien hendrerit nunc, vel dignissim urna nunc non lorem. Suspendisse potenti. Nam finibus arcu a est scelerisque, in vulputate tortor finibus. Fusce cursus nec est a ullamcorper. Integer ac volutpat mi. Nulla facilisi. Sed tincidunt orci non mi pharetra, non tincidunt lacus egestas. In sed tellus nec risus placerat lacinia. Integer consectetur, enim at posuere fermentum, purus arcu pellentesque purus, sit amet aliquam nunc mi et sapien. Vestibulum sed lorem nisl. Mauris ac varius risus. Quisque cursus euismod nulla in varius. Aenean maximus, ipsum at accumsan dignissim, neque lectus faucibus risus, nec blandit turpis dui sit amet mi. Donec porttitor nunc non elit efficitur, vitae suscipit sapien malesuada."
+      }
+    ]
+  },
+  {
+    name: "Marc Watkins",
+    role: "Expert, Thought Leader, Innovator",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/watkins.png",
+    quote: "Jazz is a dialogue. It requires everyone to actually listen.",
+    questions: [
+      {
+        q: "How did you first discover jazz?",
+        audio: "audio/tomas-q1.mp3",
+        transcript: "My uncle had a record player and a stack of Blue Note albums — Coltrane, Monk, Miles. I was twelve. I remember putting on 'Kind of Blue' and just sitting on the floor, completely still, for the entire side. I didn't understand what was happening harmonically but I understood that something profound was being said. I found my uncle and asked him to explain everything. That conversation lasted about five years."
+      },
+      {
+        q: "Describe your compositional process.",
+        audio: "audio/tomas-q2.mp3",
+        transcript: "Messy. Nonlinear. I usually start with a rhythm — something I've been tapping on tables or steering wheels. Then I find a chord that has the right emotional gravity for that rhythm. Then I abandon both and start again. I've learned not to trust the first idea, but also not to dismiss it — often the initial instinct returns in a disguised form by the end. The piece teaches you what it wants to be."
+      },
+      {
+        q: "What do you think jazz communicates that other music can't?",
+        audio: "audio/tomas-q3.mp3",
+        transcript: "Conversation. Real conversation — the kind where you don't know what the other person is going to say next, and you have to respond honestly in real time. Classical music is a letter. Pop music is a slogan. Jazz is a dialogue. And like any good dialogue, it requires everyone in the room to actually listen, not just wait for their turn to speak."
+      },
+      {
+        q: "Who are your biggest influences?",
+        audio: "audio/tomas-q4.mp3",
+        transcript: "Musically? Monk for the audacity of leaving space. Jobim for the way melody can ache. In terms of how to live as an artist — my grandmother, who was a seamstress. She had this total dedication to craft, this refusal to let anything leave her hands that wasn't finished properly. She never thought of herself as an artist. But she was one."
+      },
+      {
+        q: "What's next for you?",
+        audio: "audio/tomas-q5.mp3",
+        transcript: "I've been working on a suite about displacement — about what it sounds like when a community loses its place. Partly inspired by my family's history, partly by what I see happening in cities everywhere. I want it to be angry but also tender. That tension is the work right now: finding the musical language for grief that doesn't collapse into sentimentality."
+      }
+    ]
+  },
+  {
+    name: "Priya Nair",
+    role: "Quantum Physicist",
+    color: "#2e7a4e",
+    initials: "PN",
+    avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face",
+    quote: "You can have the most successful theory in science and still not fully understand it.",
+    questions: [
+      {
+        q: "Can you explain quantum entanglement simply?",
+        audio: "audio/priya-q1.mp3",
+        transcript: "I'll try! Imagine you have two gloves — one left, one right — and you separate them without looking. You put them in boxes and ship them to opposite sides of the planet. The moment you open one box and see a left glove, you instantly know the other is a right glove. Quantum entanglement is like that, except the gloves don't have a definite handedness until one of them is observed. The act of measurement — at any distance — determines both simultaneously. Einstein called it spooky action at a distance. He meant it as a criticism. We now know he was right about the spookiness."
+      },
+      {
+        q: "What excites you most about quantum computing?",
+        audio: "audio/priya-q2.mp3",
+        transcript: "The possibility of simulating molecular chemistry accurately enough to design new drugs and materials from first principles. The drug discovery process today is still largely trial and error. If we can model how molecules interact at a quantum level — which classical computers genuinely cannot do efficiently — we could potentially compress decades of pharmaceutical research into years."
+      },
+      {
+        q: "Is there anything that still genuinely confuses you?",
+        audio: "audio/priya-q3.mp3",
+        transcript: "The measurement problem. After a century of quantum mechanics we still don't have a satisfying account of what happens when a quantum system is observed. The mathematics is extraordinarily precise — it predicts experimental outcomes with astounding accuracy. But the interpretation of what is physically happening remains contested. That should humble us all. You can have the most successful theory in the history of science and still not fully understand it."
+      },
+      {
+        q: "How do you stay creative in a technical field?",
+        audio: "audio/priya-q4.mp3",
+        transcript: "I read outside my field obsessively. Poetry, architecture, history of science. The structural similarities between different domains of human knowledge are striking. The way a poem builds tension and releases it is not so different from how a proof unfolds. I find that metaphors from one field often unlock something I've been stuck on in another. The brain makes connections when you give it diverse material to work with."
+      }
+    ]
+  },
+  {
+    name: "Elias Bergström",
+    role: "Wilderness Chef",
+    color: "#5a6e2e",
+    initials: "EB",
+    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
+    quote: "Eating is an ecological act whether we acknowledge it or not.",
+    questions: [
+      {
+        q: "How did you end up cooking in the wilderness?",
+        audio: "audio/elias-q1.mp3",
+        transcript: "I trained in classical French kitchens — very structured, very hierarchical. After six years I was technically proficient and completely burned out. A friend invited me on a foraging walk in the Swedish highlands. I cooked the things we found on a fire that evening and it was the best meal I'd made in years, with no equipment, no brigade, no white tablecloths. Something reset in me that night. I gave notice the following week."
+      },
+      {
+        q: "What can foraged ingredients offer that shop-bought can't?",
+        audio: "audio/elias-q2.mp3",
+        transcript: "Place. A chanterelle from this particular hillside after three days of rain tastes of that hillside and that rain. It's a flavour you cannot replicate because you cannot replicate the conditions that produced it. When I serve foraged food, I'm serving a specific moment in a specific landscape. That terroir is something that industrial agriculture has engineered out of the food system, but it's still out there if you know where to look."
+      },
+      {
+        q: "What's the most important skill for open-fire cooking?",
+        audio: "audio/elias-q3.mp3",
+        transcript: "Patience and observation. Fire is not a constant heat source — it is always changing, always having a personality of its own. You learn to read it: the colour of the coals, the height of the flame, how the wind is moving. You adjust constantly. It makes you a more present cook. You cannot check your phone and manage a live fire at the same time."
+      },
+      {
+        q: "What's your philosophy around food and nature?",
+        audio: "audio/elias-q4.mp3",
+        transcript: "That eating is an ecological act whether we acknowledge it or not. Every meal has a landscape behind it. Foraging makes that visible and immediate — you understand the relationships between species, the seasonality, the fragility of it all. I'm not romantic about it. Nature is indifferent and difficult. But that encounter with difficulty is part of what makes the food meaningful."
+      },
+      {
+        q: "What dish best represents your cooking?",
+        audio: "audio/elias-q5.mp3",
+        transcript: "Birch sap braised reindeer with pine needle oil and pickled ramsons. It sounds very Nordic, very on-brand. But it represents everything I care about: using the whole animal with respect, letting the landscape determine the flavour profile, not hiding behind technique. When you eat it you should feel like you're somewhere cold and green and vast. That's what I'm trying to do."
+      }
+    ]
+  },
+  {
+    name: "Yuki Tanaka",
+    role: "Documentary Filmmaker",
+    color: "#3a5a8a",
+    initials: "YT",
+    avatarUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face",
+    quote: "Trust is not something you can extract. It accumulates.",
+    questions: [
+      {
+        q: "What makes a documentary subject compelling?",
+        audio: "audio/yuki-q1.mp3",
+        transcript: "Contradiction. I'm always looking for a subject who contains multitudes — who doesn't reduce easily to a single interpretation. The most interesting people I've filmed hold genuinely incompatible beliefs simultaneously, or have done things that don't fit a neat narrative. That resistance to reduction is what makes documentary work hard and also what makes it worthwhile. The moment a subject becomes explicable, I get a little worried."
+      },
+      {
+        q: "How do you build trust with your subjects?",
+        audio: "audio/yuki-q2.mp3",
+        transcript: "Time and consistency. I spend weeks or months before I turn a camera on. Just being present, being boring, being reliable. People eventually stop performing for you when you become part of the furniture. The mistake filmmakers make is assuming a long interview can do what sustained presence does. It can't. Trust is not something you can extract. It accumulates."
+      },
+      {
+        q: "What ethical challenges arise in documentary filmmaking?",
+        audio: "audio/yuki-q3.mp3",
+        transcript: "The gap between what you filmed and what you show is where most of the ethical weight lives. Editing is interpretation. You are constantly making choices about context, emphasis, sequence — choices your subjects often have no visibility into until the film is released. I try to be as transparent as possible about that process, but there's no way to fully resolve the power asymmetry. You can only try to be honest about it and take responsibility for your choices."
+      },
+      {
+        q: "What project changed you most?",
+        audio: "audio/yuki-q4.mp3",
+        transcript: "A five-year project following three families in a declining industrial town. I went in thinking I understood the story — deindustrialisation, loss, nostalgia. What I found was far more complicated. People adapting in ways I hadn't predicted, finding new forms of meaning and community. It dismantled a lot of my assumptions. I think I'm a less arrogant filmmaker because of it. Or at least I try to be."
+      }
+    ]
+  },
+  {
+    name: "Fatima Al-Rashid",
+    role: "Conflict Mediator",
+    color: "#8a6a2e",
+    initials: "FA",
+    avatarUrl: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=200&h=200&fit=crop&crop=face",
+    quote: "The goal should never be the absence of conflict — it should be good processes for working through it.",
+    questions: [
+      {
+        q: "What does mediation require that people underestimate?",
+        audio: "audio/fatima-q1.mp3",
+        transcript: "Physical stamina and emotional regulation. People imagine mediation as a cerebral, diplomatic process — careful words in a quiet room. The reality involves hours of intense hostility, sometimes spanning days, in conditions that are often anything but comfortable. You need to be able to sit with enormous tension without absorbing it, without taking sides, without flinching. That takes a kind of bodily discipline that isn't often discussed."
+      },
+      {
+        q: "Is there always a solution to conflict?",
+        audio: "audio/fatima-q2.mp3",
+        transcript: "Not always. Sometimes the interests are genuinely incompatible and no agreement is possible. But even in those cases — especially in those cases — process matters. People need to feel that their concerns were heard by someone who was not their enemy. Even a failed mediation can reduce the temperature of a conflict if it was conducted with genuine respect. The goal is not always resolution. Sometimes it is simply de-escalation."
+      },
+      {
+        q: "How do you remain impartial in the face of injustice?",
+        audio: "audio/fatima-q3.mp3",
+        transcript: "I don't pretend impartiality means indifference to justice. It means I don't do the parties' thinking for them. My job is to create the conditions in which they can reach a sustainable agreement — not to impose my own moral framework. That is sometimes very uncomfortable. But I've seen what happens when mediators become advocates: the trust breaks down and the process collapses. The most important thing I can offer is a space where both sides believe they will be heard."
+      },
+      {
+        q: "What gives you hope?",
+        audio: "audio/fatima-q4.mp3",
+        transcript: "The ordinary courage of people in difficult circumstances. I've sat across from individuals who had every reason to want revenge, who had lost everything, and watched them choose to look for a path forward anyway. Not because they forgave everything. Not because justice had been done. But because they made a pragmatic decision that the future mattered more than the score. That choice, made over and over by ordinary people, is what holds societies together. I've been privileged to witness it many times."
+      },
+      {
+        q: "What should more people know about conflict?",
+        audio: "audio/fatima-q5.mp3",
+        transcript: "That conflict is not the problem — it is a signal. It tells you that something important is contested and unresolved. Societies that suppress conflict don't eliminate it; they drive it underground, where it festers. A culture that can argue openly and then negotiate toward agreement is far more resilient than one that enforces a surface calm. The goal should never be the absence of conflict. It should be the presence of good processes for working through it."
+      }
+    ]
+  },
+  {
+    name: "Marcus Webb",
+    role: "Palaeontologist",
+    color: "#6e3a2e",
+    initials: "MW",
+    avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
+    quote: "That silence when you realise what you're looking at — it still comes every single time.",
+    questions: [
+      {
+        q: "What's it like to find a fossil for the first time?",
+        audio: "audio/marcus-q1.mp3",
+        transcript: "There is a specific quality of silence when you realise what you're looking at. You've been walking badlands for days, knees aching, sun destroying you, and then something catches your eye in the rock face — a different texture, a curve that doesn't belong to the geology. You crouch down and you start brushing, and the world gets very quiet. I've been doing this for twenty-three years and that silence still comes every single time."
+      },
+      {
+        q: "Which period in Earth's history fascinates you most?",
+        audio: "audio/marcus-q2.mp3",
+        transcript: "The Cambrian explosion. Over a geologically brief period — perhaps twenty million years — almost every major body plan that would ever exist first appeared. We went from a world of relatively simple organisms to one of astonishing complexity and diversity in what amounts to a blink of evolutionary time. We still don't fully understand why. The fossil record from that period is a cabinet of wonders and a cabinet of mysteries in equal measure."
+      },
+      {
+        q: "What has palaeontology taught you about extinction?",
+        audio: "audio/marcus-q3.mp3",
+        transcript: "That it is the norm, not the exception. Over ninety-nine percent of species that have ever existed on this planet are now extinct. Extinction is not a failure — it is part of the rhythm of life on Earth. What the record also shows is that the pace matters enormously. Gradual change allows adaptation. Rapid change does not. The current extinction crisis is happening at a rate that the fossil record tells us is genuinely anomalous. That should be taken very seriously."
+      },
+      {
+        q: "What's the most surprising thing you've discovered?",
+        audio: "audio/marcus-q4.mp3",
+        transcript: "The evidence of parental behaviour in dinosaurs. For a long time the popular image was of a cold, reptilian animal laying eggs and walking away. The fossil evidence tells a much more complex story — of nest building, of brooding, of what appears to be group nesting behaviour. The line between the terrible lizards of popular imagination and the birds you see in your garden is not a line at all. It's a continuum."
+      },
+      {
+        q: "How do you communicate science to the public?",
+        audio: "audio/marcus-q5.mp3",
+        transcript: "Through story, always. The facts matter, but they land when they're embedded in a narrative. What was this animal doing? Where was it going? What did it eat that morning? Speculation grounded in evidence is what makes extinct organisms feel real to people. I want someone reading about a fossil find to feel the weight of deep time — to feel how extraordinary it is that we can know anything at all about a creature that died two hundred million years ago."
+      }
+    ]
+  }
+];
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+function buildCard(person, personIndex) {
+  const card = document.createElement('article');
+  card.className = 'person-card';
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'person-header';
+
+  const avatarWrap = document.createElement('div');
+  avatarWrap.className = 'avatar-wrap';
+  const img = document.createElement('img');
+  img.className = 'avatar';
+  img.src = person.avatarUrl;
+  img.alt = person.name;
+  avatarWrap.appendChild(img);
+
+  const meta = document.createElement('div');
+  meta.className = 'person-meta';
+  meta.innerHTML = `<div class="person-name">${person.name}</div><div class="person-role">${person.role}</div>`;
+
+  header.appendChild(avatarWrap);
+  header.appendChild(meta);
+  card.appendChild(header);
+
+  const quoteEl = document.createElement('p');
+  quoteEl.className = 'person-quote';
+  quoteEl.textContent = `"${person.quote}"`;
+  card.appendChild(quoteEl);
+
+  // Accordion
+  const ul = document.createElement('ul');
+  ul.className = 'accordion-list';
+
+  person.questions.forEach((item, qIndex) => {
+    const li = document.createElement('li');
+    li.className = 'accordion-item';
+
+    const btn = document.createElement('button');
+    btn.className = 'accordion-trigger';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = `<span>${item.q}</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>`;
+
+    const panel = document.createElement('div');
+    panel.className = 'accordion-panel';
+    panel.setAttribute('role', 'region');
+
+    const inner = document.createElement('div');
+    inner.className = 'panel-inner';
+
+    // Audio section
+    const audioSection = document.createElement('div');
+    audioSection.className = 'audio-section';
+    audioSection.innerHTML = `<span class="audio-label">Audio Response</span>`;
+
+    const audioEl = document.createElement('audio');
+    audioEl.src = item.audio;
+    audioEl.preload = 'none';
+
+    const playerDiv = document.createElement('div');
+    playerDiv.className = 'custom-player';
+
+    const playBtn = document.createElement('button');
+    playBtn.className = 'play-btn';
+    playBtn.setAttribute('aria-label', 'Play');
+    playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+
+    const trackDiv = document.createElement('div');
+    trackDiv.className = 'player-track';
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'progress-bar-wrap';
+    const progressFill = document.createElement('div');
+    progressFill.className = 'progress-bar-fill';
+    progressWrap.appendChild(progressFill);
+    const times = document.createElement('div');
+    times.className = 'player-times';
+    times.innerHTML = `<span class="current-time">0:00</span><span class="duration-time">0:00</span>`;
+    trackDiv.appendChild(progressWrap);
+    trackDiv.appendChild(times);
+
+    playerDiv.appendChild(playBtn);
+    playerDiv.appendChild(trackDiv);
+
+    // Player logic
+    let isPlaying = false;
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audioEl.pause();
+      } else {
+        // Pause all others
+        document.querySelectorAll('audio').forEach(a => { if (a !== audioEl) a.pause(); });
+        document.querySelectorAll('.play-btn').forEach(b => {
+          if (b !== playBtn) b.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+        });
+        audioEl.play().catch(() => {});
+      }
+    });
+
+    audioEl.addEventListener('play', () => {
+      isPlaying = true;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+    });
+    audioEl.addEventListener('pause', () => {
+      isPlaying = false;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+    });
+    audioEl.addEventListener('ended', () => {
+      isPlaying = false;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+      progressFill.style.width = '0%';
+      times.querySelector('.current-time').textContent = '0:00';
+    });
+    audioEl.addEventListener('timeupdate', () => {
+      if (audioEl.duration) {
+        const pct = (audioEl.currentTime / audioEl.duration) * 100;
+        progressFill.style.width = pct + '%';
+        times.querySelector('.current-time').textContent = formatTime(audioEl.currentTime);
+      }
+    });
+    audioEl.addEventListener('loadedmetadata', () => {
+      times.querySelector('.duration-time').textContent = formatTime(audioEl.duration);
+    });
+    progressWrap.addEventListener('click', (e) => {
+      if (audioEl.duration) {
+        const rect = progressWrap.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        audioEl.currentTime = ratio * audioEl.duration;
+      }
+    });
+
+    const noteDiv = document.createElement('p');
+    noteDiv.className = 'no-audio-note';
+
+
+    audioSection.appendChild(playerDiv);
+    audioSection.appendChild(noteDiv);
+
+    // Transcript section
+    const transcriptSection = document.createElement('div');
+    transcriptSection.className = 'transcript-section';
+    transcriptSection.innerHTML = `<span class="transcript-label">Transcript</span><p class="transcript-text">${item.transcript}</p>`;
+
+    inner.appendChild(audioSection);
+    inner.appendChild(audioEl);
+    inner.appendChild(transcriptSection);
+    panel.appendChild(inner);
+
+    // Toggle
+    btn.addEventListener('click', () => {
+      const isOpen = panel.classList.contains('open');
+      // Close all in this card
+      ul.querySelectorAll('.accordion-panel.open').forEach(p => {
+        p.classList.remove('open');
+        p.previousElementSibling.classList.remove('open');
+        p.previousElementSibling.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    li.appendChild(btn);
+    li.appendChild(panel);
+    ul.appendChild(li);
+  });
+
+  card.appendChild(ul);
+  return card;
+}
+
+const grid = document.getElementById('grid');
+people.forEach((p, i) => grid.appendChild(buildCard(p, i)));
+</script>
+</body>
+</html>
