@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Teachers Talk About AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <p class="site-eyebrow">Audio Interviews</p>
+  <h1 class="site-title">Teacher <em>Voices</em></h1>
+  <p class="site-subtitle">Conversations with teachers of writing coming from a variety of perspectives. Click any question to hear their response and read the full transcript.</p>
+</header>
+
+<div class="featured-wrap" id="featured-wrap"></div>
+
+<main>
+  <div class="people-grid" id="grid"></div>
+</main>
+
+
+<script>
+const people = [
+  {
+    name: "Marc Watkins",
+    role: "Expert, Thought Leader, Innovator",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/watkins.png",
+    quote: "This technology, if it's used, should be used to augment or collaborate.",
+    questions: [
+      {
+        q: "How do we prevent AI from getting between us and our students? ",
+        audio: "audio/watkins/1.mp3",
+        transcript: "I'm consistently shocked by the fact that every single month or every single week, we get new AI updates that get rolled into these existing interfaces. So it's challenged me in ways that have called for me to talk with my students a lot more openly about how they're writing, how they're using these different tools. You know, this was three years ago. We would not talk to a student about how they're using a word processor. Right? We now have to have some more in-depth conversations about how they're using this tool in ways that are transparent just so that we can understand how this is affecting their learning and how it's affecting their actual process work in their writing."
+      },
+      {
+        q: "What are your overall opinions about Generative AI here at the end of 2025?",
+        audio: "audio/watkins/2.mp3",
+        transcript: "I'm very upset about generative AI in education as a whole because I don't think it's being done very ethically or being responsibly iterated at all. We are a huge, I think, target for a lot of these AI developers, And our students are being marketed these tools. Our faculty are also being marketed these tools to actually grade the work. So it is presenting some existential questions about what the purpose is in the classroom and how this actually functions. My sort of evolution of thinking about generative AI is that this technology, if it's used, should be used to augment or collaborate. It should not be used to automate away learning or that actual intrinsic value of what we call desirable difficulties in education. Know, friction matters. Having assignments that are increasingly more challenging helps us learn and process material. We don't have to be punitive about that in any way and make it so hard or so ridiculously challenging that students start to bulk at that process and drop out. We don't wanna do that. But I do think that there is an open question about where that intentional friction needs to be put in place, how much is valuable, and, you know, it's what I think about all the time. And we talk with faculty about this, and some are going back to analog processes. They're going back to blue books, writing journals. There may be a place for that in some way, shape, or form for education. I don't think it's gonna be totality of going back to those situations. I wanna find happy mediums where they can do some part of that and also look at exploring some new possibilities with this technology."
+      },
+      {
+        q: "Is is possible for teachers to ban completely AI in a writing course?",
+        audio: "audio/watkins/3.mp3",
+        transcript: "I don't think we can really secure a classroom for a future that's constantly arriving. The only way you can do that is by going to a studio model where you're observing students constantly through the process, and that means that all the learning has to take place in the classroom or under some sort of proctored system where that's a technology that's monitoring them or something else. And even those are very fallible. They're easy to bypass. So I do think there is a very real argument to say that learning itself has been compromised by this technology or more pointedly, how we've done this before in the past has changed so radically that we have to start rethinking what we're doing, and that takes permission to do this. That's actually what we've done a really great job here in the department too, especially from your leadership, Steven, too, about actually giving us permission to explore some different possible solutions to this. I don't think there is one right answer. In fact, that's what makes this kind of a wicked problem from a policy perspective. You're gonna have lots of different values, lots of different ideas, but having the permission to explore those with your students and trying to find a way that works best for you at that moment is where we are right now."
+      },
+      {
+        q: "Is there any hope for asynchronous online learning?",
+        audio: "audio/watkins/4.mp3",
+        transcript: "Online learning right now is one of the most challenging spaces for AI. I feel like if we give up entirely on it too, we are closing the door on equity and access that we have done for the last twenty five years. I think a huge number. I don't know if it's the majority of assessment, but I think it may be. It's taking place in asynchronous formats in lots of ways. I think there are abilities for us to create meaningful spaces with students that actually can invite them to be a little bit more embodied in these disembodied spaces online. There's no reason why you can't assign an online student a journal that they handwrite into, that they can take a photograph and upload that into an OCR reader or even a language model that would actually be able to read that. So there are gonna be some compromises that we can make and some ways we can do this that are interesting. They get it goes back to that permission to experiment and explore. I do feel like a lot of people find the concept of doing this in an online class impossible. So we need to make sure that they realize that there are possibilities that exist first now and give them some options before we just sort of give up on that entirely."
+      },
+      {
+        q: "How are writing teachers coping with the rise of AI??",
+        audio: "audio/watkins/5.mp3",
+        transcript: "Oh, boy. How are they dealing with this? Well, they're not giving up, which is a good thing. They're not throwing in the towel. They are trying new things, and I think there's a broad acknowledgement that a lot of what we're trying isn't working. But that's okay. We're learning from this. That's a stage two. I do worry about the fact too that this is an attrition type approach, and we are seeing some people burn out, and we are seeing some people become very combative. We've been very clear and I've been too talking about the fact too that, you know, it's not your student's fault. They didn't ask for this. They're being sold this by these companies all wrong too, and we need to work with them to actually understand discernment and actually when these tools are appropriate to use and when it's not appropriate to use. And there are going to be times when they're gonna challenge that. And I think as a department as a whole, we've done a really good job of that too, of working through this process, but it is exhausting. It is exhausting our folks."
+      },
+      {
+        q: "How are writing teachers coping with the rise of AI??",
+        audio: "audio/watkins/5.mp3",
+        transcript: "Oh, boy. How are they dealing with this? Well, they're not giving up, which is a good thing. They're not throwing in the towel. They are trying new things, and I think there's a broad acknowledgement that a lot of what we're trying isn't working. But that's okay. We're learning from this. That's a stage two. I do worry about the fact too that this is an attrition type approach, and we are seeing some people burn out, and we are seeing some people become very combative. We've been very clear and I've been too talking about the fact too that, you know, it's not your student's fault. They didn't ask for this. They're being sold this by these companies all wrong too, and we need to work with them to actually understand discernment and actually when these tools are appropriate to use and when it's not appropriate to use. And there are going to be times when they're gonna challenge that. And I think as a department as a whole, we've done a really good job of that too, of working through this process, but it is exhausting. It is exhausting our folks."
+      }
+    ]
+  },
+  {
+    name: "Robert Cummings",
+    role: "Professor, Administrator, Skeptic",
+    color: "#2e6e8e",
+    initials: "RC",
+    avatarUrl: "images/cummings.png",
+    quote: "I'm long on writing. I think the value of human writing is on the rise...",
+    questions: [
+      {
+        q: "Can you reflect on the rise of AI and how it has affected your practice?",
+        audio: "audio/cummings/1.mp3",
+        transcript: "The first thing I would lead with is that generative AI represents a fundamental shift in literacy, which our brains cannot really adapt to as far as I can understand. So prior to the development of generative AI, in a very general sense, we could assume that text was written by humans. Maybe one, maybe multiple, maybe humans we knew, maybe humans we didn't, maybe humans we trusted, maybe humans we didn't, but we always had the assumption that text was generated by humans. Now some people poked around at that. Maybe there's some exceptions, but that's how our brains are trained. And as of November 2022, you could maybe argue the difference different dates. That's that's shifted, and our brains don't shift. How does that follow on? What does that mean? I think we're just all in the process of living through this uninformed consent, nonconsensual research project. That's the first thing that I think about with the development of generative AI. It's a rapid literacy shift, and we don't really know where it's going. Second thing that I think about is the fact that generative AI has shifted largely in our lives from being a research technology to being a consumer technology. So we created it. You know? We did we, the academy, created generative AI with work on machine learning and neural networks. But it was then bought out, taken over, invested in I don't know exactly the right term to put into it, in capitalist enterprises. And those capitalist enterprises are very difficult to contain. So two things, literacy shift and then consumer technology. Those are the two big things I think about."
+      },
+      {
+        q: "What are your thoughts about GenAI in the writing classroom?",
+        audio: "audio/cummings/2.mp3",
+        transcript: "So what I find is that I thought of generative AI as enhanced search, and that was generally my first strategy at addressing generative AI in the writing classroom. It's sort of like, well, I'm gonna treat it like a really big Google box, that we can use and and deepen search and queries that would feed into our writing projects. Turns out is, you know, back to those comments I made earlier about it being a consumer technology. It's just very difficult to contain that it's everywhere all the time, and that it's on everyone's phone for just about every possible use imaginable. It's been inserted into all of our campus technologies for sure. And so this idea that we could engage it in the writing classroom as if it were the first time we're ever used in sort of like a positivistic or experimental approach is just flawed. But I also don't have a replacement, like, to generate space for critical reflection on the use of it and the purpose of using it and the outputs. So until I have a better idea or someone give me a better method for it, that's my best effort at articul or at integrating it into my writing classroom."
+      },
+      {
+        q: "What is something faculty and WPAs can do to reckon together with GenAI as an evolving technology?",
+        audio: "audio/cummings/3.mp3",
+        transcript: "Increased communication between faculty and writing classrooms is really an important strategy in dealing with and continually evolving technology. But the other thing that I think I would want to stress is I think that WPAs really ought to lean into the primacy of writing, that writing is an essential human function, and it cannot be taken away by an artificial technology, that you don't know what you think until you really have a chance to write about what you think. And it creates a space for understanding and surprise and collaboration that can't be taken away by another technology. So in some ways, I kind of envision a future maybe where generative AI technologies are so ubiquitous in that they are crowding out or in thought that the writing classroom is a place where we give privilege and separation so that people can discover what they think and it being even more important to do that now than ever. Our students need this. We need this. Because the second you're twenty four hours a day connected to technology unless you deliberately carve out space. And that's what the writing classroom is now. It is a deliberate carve out and the otherwise continuous stream of unexamined electronic engagement."
+      },
+      {
+        q: "What are some accordances and limitations of GenAI for students?",
+        audio: "audio/cummings/4.mp3",
+        transcript: "Well, I mean, of course. There's so many ways that it can be used to improve writing. I think that's one of the most exciting ones is bibliography assistance. You know, I'm writing about something. I've got a bibliography. What am I missing? What other research has been done out there that has a similar bibliography but has 20% sources that are different from mine. What are those sources? Let me go look at them. That's a that's a really, I don't know, staid way of thinking about the technology, but it can definitely do that for you in that book alone. Writing's becoming more and more correct. I mean, I just don't see the number and amount of superficial errors in writing. I'm relieved when I see student writing with errors because I know it's authentic, or at least I suspect that it's authentic. So this you know, the thing is it's probably been written about, I just haven't read it, is this the specter of AI, This sort of becomes a fatigue for writing instruction because every everything you look at, you have to guess whether this is whose thoughts are these that I'm reading. So just having started by saying, you know, it's a literacy shift, which we can't possibly appreciate because we assign intentionality and consciousness to machines where it doesn't exist. We've also got the burden of not knowing whether work that's being submitted to us is the work of the students or is the work of their AI. I mean, it's we have writing lab in my class, and I've watched my students use AI during a writing lab. And they're just they're just opening their writing tools. They don't associate any sort of merit or, you know, sense of doing something wrong. They just use the tools that they use to write. You know, I think about I can't remember which one of the tech startup CEOs that said this. They were pushing, an illustration technology. And the the way he said it was just stunning. He said, drawing is hard, but we're here to make drawing easy. Not everyone can draw, and that's not fair. I mean, I just wanted to scream. You know? I mean, if there's just so many problems with that perspective, but I can't deny the marketability of that. Hey. I'm gonna improve your capacity. And so we're living through this, you know, grand experiment with with no consent."
+      },
+      {
+        q: "How should writing teachers and WPAs navigate the evolving landscape of GenAI in education?",
+        audio: "audio/cummings/5.mp3",
+        transcript: "I'm long on writing. I think that the value of human writing is on the rise and that what we teach as a means of creating knowledge, of self discovery, of integrating oneself into a knowledge making community is more valuable than it was ten years ago and will be more valuable ten years from now because Steven Monroe is going to give me a computer lab to teach in in the fall. And the number of people that come in who also want to teach in this lab will be massive."
+      }
+    ]
+  },
+  {
+    name: "Sarah Campbell",
+    role: "Teacher, Enthusiast, Advocate",
+    color: "#6b4c8a",
+    initials: "SC",
+    avatarUrl: "images/campbell.png",
+    quote: "You're not a writer anymore. You're an editor.",
+    questions: [
+      {
+        q: "How has GenAI affected your teaching?",
+        audio: "audio/campbell/1.mp3",
+        transcript: "So maybe I'll kind of tell my story. Like, that's probably a good place to start. I mean, I don't think giving a historical lens on AI is really truly my gift to the world. But what I can tell you is that it was fall of wouldn't it be 2021? Isn't that right? Isn't it November 2021 when ChatGPT said, here it is, world. And then the 2022 was when it really kicked in, but it was like November, November, like 11/30/2021, I'm gonna say, when ChatGPT said, Have at it. And so we were doing our very last revisions in my class. So we had our last, let me talk about our last three projects really quickly. So we do an argument problem solution proposal, and then we do multimodal, which is a remix, one minute documentary of that core message from your problem solution proposal. And then we do a final reflection project, which is a culmination of reflections you've been doing all semester long. Okay. And those things kind of, yes, they have incremental deadlines, but what happens for my classes because we have unlimited revisions and unlimited submissions in my class is that I will have a few students who are really kind of using our revision week at the end to make some heavy revisions, maybe even initial submissions. Okay. Not many, but a few. And so one of those, not many, but a few, in her final draft of her revised analysis. So this is going way back. This is going way back. And that was a TED Talk analysis. And it had this little story bit in it, and it had this little kind of grandfatherly humor. It sounded like my grandpa Canela, who's Sicilian. Okay? Like, no. And this was like a kid from Wisconsin. Right? And I just had a minute where I thought, what in the world? And I had all the other writing pieces, you know, this is the very end. And so I simply sent an email and said, hey, I am so excited to hear about your process for this paper because it is just so unique. I've never read anything like this from you, and I would love to talk to you. And her email back to me was, I'll do it over. And I said, No, no, no, no, we're going to have some coffee. And so we sat down and we had coffee, and of course she had used this brand new great tool to do this not brand new, great thing. And I just knew at that moment that I was going to have to be in it, in the thick of it. I was going to have to get invested in my people and in what they are up against because it was clear to me that with unlimited revisions and unlimited submissions and call Sarah, text Sarah anytime night or day, even weekends and evenings, something is awry here. You thought that I would care more about hitting standards and savvy language, right? This great intellectual language thing that you thought you couldn't get to. Cared more about trying to hit that for me than you cared about sharing you with me and of all the things."
+      },
+      {
+        q: "How are you experimenting with GenAI in your classroom?",
+        audio: "audio/campbell/2.mp3",
+        transcript: "And then we jump into 2022, and I just have at it with them. So my next round is to get in there, and at every step of the writing process, I say, let's see what this thing can do. I don't really want it to write for me, but even Google has a hard time answering the question, who are the people I should be reading? Where are the places where good research is going on? ChatGPT is very good at actually giving me some great hits on who you should be reading and where the research is taking place and what's happening kind of in the field. So I started to kind of push more for that. And then I started to do panel discussions. So I invited teachers to come and sit down with students who would talk about all the ways that they're using it in all their classes. And that was so eye opening. It was probably 2022 or '3, maybe '23. I think it was '23. 2023 when a student said, I'm using AI for emotional support. And I at the time had no clue what they meant. I just kind of sat there and said, That's interesting. So are you asking questions about mental health services? She goes, No, I talked to it. And I said, Well, how does that work? Like, what kinds of things would you say? Are you okay to share? Do you want to talk about that? I didn't know what I was getting into. I didn't know that people created a friend. I didn't know that they created their own bots, that they loaded it with their own writings or their own thoughts, maybe even diary entries or things like that. Like, I had no idea that people were creating these friendships. That just blew my mind. And she said it and shared it in class a little bit. We had done like these recordings and then we kind of unpacked it in discussion and the room got quiet. And I talked about how wonderful it is to use technology in so many creative ways because there's so many problems that we're even afraid to even try to solve. And this just gives us a chance to get creative and no one's, you know, overseeing it or picking it apart and it's not quite clinical. It's just really creative. And I was trying to recover, you know, because I just didn't want her being quote demonized for being friendly with a machine. But that's really what happened. There was this idea of judgment and like, oh, it's okay to cheat on something, but just don't use it like it's a person and actually emotionally get attached to it. Then that's really wrong. Like, it was that whole hierarchy of the sins, you know? And I thought, oh, man, that's not a good place. We don't really want to go there. So let's be a little more open minded. Let's be more gentle. Let's think about for every person on the planet, there is a different way to go about thinking and imagining and interacting and all that. And so we kind of did some unpacking of that. So the journey, so now we're 2025 and just I continue to do the panel discussions, I continue to do students every semester, do a journal entry about how you're using AI and they do a video. So it's not a written thing. So it's really them, it's really them talking. And sometimes you all see that they're reading off a screen. So they've used ChatTiffD to decide what they're gonna say, which is cute. I think that's really great. You know, I already I know like I know I'm in the know and they know that I'm in the know. And so it's almost like they're playing a joke with me. So I think humor has been really helpful for me in this journey. I think, yes, tetrapy just keeps advancing and so it's Claude and, the great number of many other kind of gender driven by tools and all kinds of other tools with other labels. And I think it's an exciting time. I think it's only tricky if you lose your sense of humor and you forget to talk to kids, to students. Sorry, please don't call them kids. They'll be mad at me. But I do, I call them that all the time. But to students, right? To people, really to people, right? So if you lose your sense of humor and if you lose your sense of humanity and connection to people."
+      },
+      {
+        q: "On a granular level, how is GenAI changing the writing classroom?",
+        audio: "audio/campbell/3.mp3",
+        transcript: "Yeah, what I told my students and what I really believe is what I'll tell you. You're not a writer anymore, you're an editor. And I say that not in a bad way, but when you go into a field, more than likely you are going to use AI in some form or fashion, and so you've got to bring the human element into the mix. So you're no longer a writer, you're an editor. And so we talk a lot about, well what do great editors do? And wouldn't it be great to get a film and then you cut it, splice it, chop it, and now it's viewable? Because what you gave me was like something, but it was not something to consume, right? And also you need to think about content consumption and not reading. So we need to make some shifts, right? Again, it's word choice, right? When you have a problem, Andrew, I guarantee you it's an alignment problem. So I talk about that in the philosophical level with students, I have them literally raise their hands. Who you are and what you do have to come together or everything's going to feel really tough until you do. Who you are and what you do have to come together. And so like with writing, what the message is and the way we're displaying it have got to come together, right? And so I think AI can do a lot of the what, right? Some of the what. We gotta check the what. Okay. But then what the message you want to send, that's the human. Okay. Alright. So that's an editor's job. That's an editor's job. So now I'm gonna be a really great editor, and I'm gonna work in the arena of content consumption, and I'm going to get really good at that. And then the last piece, which I've always been more interested in than writing, Am I allowed to say that? I don't care I'm saying it, and that is development of a caring human and a future leader. So that's really why we're teaching at all. You could ask me to teach anything, and I am mostly deeply interested in developing a kind, caring human and future leader. And I happen to be using writing as a way to get there."
+      },
+      {
+        q: "Do you see AI as a way to break down barriers?",
+        audio: "audio/campbell/4.mp3",
+        transcript: "We very well may be creating more barriers than it's breaking down. But the opportunity is to do that analysis, is to say when is it breaking it down and when is it creating them. And I am running it and it's not running me, but that's true for all of our tools, for all the tools that we've always had for everything. I'm running Word, Word's not running me. Like that whole idea, like any technology that we've had, I'm typing the typewriter, typewriter's not typing me kind of thing. But at the core is better editing skills. I had a student who has been a family friend, they went through accounting, got their accounting degree, they're now doing their master's degree. This person did an internship in Houston with Ernst and Young, and of all of the candidates, there were like five or six candidates to get a letter, a job at the end of this internship. He got it because he was so eager, interested, and willing to learn AI. He did all of the training on how to use AI and how to use it effectively. He worked at it, he got good at it, and he's the one that they picked. And the others may have had other skills, that's the one that they wanted. Maybe not that he was the best at it per se, but I think he probably was as well. But most what he said they talked most about was his willingness and drive and interest and curiosity to learn something new."
+      },
+      {
+        q: "What is being missed or overlooked in conversations about Generative AI and teaching?",
+        audio: "audio/campbell/5.mp3",
+        transcript: "If you can take a step away from AI and some of its many problems, it is something new. And so being a curious person, a willing person, an interested person, know, an innovative person to take a tool and see what you can make of it, that's saying something and it's saying something powerful. And so I think that's again, trying to help students understand the many, many benefits and challenges, and at the same time having a spirit of curiosity, having a willingness, having an interest. And the other thing that I'm talking to my students about quite a bit is that if something's overwhelming you, then there's a reason for it. Go dig in, find that out and be the person that changes the trajectory of the conversation and the trajectory of the usage and the trajectory of our thinking. Don't say, Oh, it's taking over. Well, you're you. No, it doesn't get to take over. Get in there and get involved. You know, feel like the Charlie Brown scene. He goes and sees Lucy and she says, You know, Charlie Brown, you might have all these phobias and they go through them all, and of course he doesn't. And she says, you know, you need involvement. We have a play. We need a director and you need involvement. You're gonna be our director, right, for the Charlie Brown Christmas special. Right? And so it's get involved."
+      },
+      {
+        q: "What is the main takeaway you want listeners to have as they traverse this issue?",
+        audio: "audio/campbell/6.mp3",
+        transcript: "Your students do not care about using AI or not using AI. Know what they care about? They care about you, and you do not really care about using AI or not using AI. You care about them. And if that is not the calculus going on, well, there may be another calling for you."
+      }
+
+    ]
+  },
+    {
+    name: "Karen Forgette",
+    role: "Teacher, Mentor, Writer",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/forgette.png",
+    quote: "It has shaken people's confidence; also their joy in teaching.",
+    questions: [
+      {
+        q: "How has the rise of Generative AI affected the way you teach writing?",
+        audio: "audio/forgette/1.mp3",
+        transcript: "I think that it has definitely affected my pedagogy. Mhmm. It's pushed me to return to strategies that I used at the beginning of my teaching career. And in some ways, that's brought me a lot of joy, and it has made me think a lot about what writing is and what it means to be a young person who is learning. The way that I've always taught writing is that writing is helping a young person gain confidence in their own ideas and the patterns that are in their mind and the images that are in their mind and to wrestle with those in really difficult ways that make them uncomfortable and then to help them communicate those ideas in a way that helps them connect with other human beings. And I think a lot of the practices that I've moved back to in the age of AI are actually really good about"
+      },
+      {
+        q: "Is Generative AI an uninvited guest in the writing classroom?",
+        audio: "audio/forgette/2.mp3",
+        transcript: "Well, I wouldn't say that this is an uninvited guest because it was it's my opinion that our department jumped the opportunity to invite this guest in without much critical consideration of the effect of these tools on learning. So I guess I would say that my my beef is more with the uncritical, atypical of higher education approach to let's jump on this as fast as we can. Let's be the first adopters of these tools without any consideration of the damage these tools could cause. And honestly, we knew the damage because we've seen the effect that smartphones have had on learning. And we just jumped right in in ways that I found and continued to find extremely troubling."
+      },
+      {
+        q: "Has your attitude towards Generative AI changed over time?",
+        audio: "audio/forgette/3.mp3",
+        transcript: "No. I mean, it's gotten I mean, I guess it's changed in this. It's hardened. And that's mostly because of the way students have been using it in very uncritical and honestly, ways that have caused them to lose confidence in their own abilities to think for themselves and in the loss of voice that has shown up even in students who are using it not wholesale, but but but just as a component or a part of their writing, it's just flattened it. And so I would say that my opinion has changed in that the things that I feared these tools would do when I first heard about them, they dumped."
+      },
+      {
+        q: "How are your colleagues confronting the rise of AI? Are they doing anything differently in their classrooms?",
+        audio: "audio/forgette/4.mp3",
+        transcript: "I observe a lot of teachers, and I have seen teachers use tech tools that are interesting. So for example, I just watched a teacher yesterday or the day before use Twine, which is kind of an organizational tool. That's very different from AI because Twine is really just a spreadsheet, basically, where you can move stuff around. And then I watched the same teacher who is having, like, a thesis testing, like a claim testing thing that she showed she sort of walked students through AI and sort of saying, look, if you've asked AI in this way, it's just gonna assume the claim is true even though the claim is false. If you ask AI in another way, it will show you the false assumption that was in the original claim. And I thought that was a very interesting thing to do."
+      },
+      {
+        q: "What teaching practices surrounnding AI concern you?",
+        audio: "audio/forgette/5.mp3",
+        transcript: "But I have also listened to and seen teachers who are basically teaching students how to use a tool that a billionaire tells them is absolutely the future, and that cannot be avoided in any way. And I have listened to teachers have conferences where they just basically sold the tool to the student, and I found that extremely troubling."
+      },
+      {
+        q: "What advice do you have for anxious new writing teachers?",
+        audio: "audio/forgette/6.mp3",
+        transcript: "One of the great things about teaching is that, you know, to really find your own way to do it and find your own way into it. So I don't really spend a lot of time I mean, maybe in my head, I tell other people how to teach, but I try not to say it out loud. But I would say the best teachers that I know are teachers who think critically about what learning is and think critically about helping their students gain confidence in their own abilities and have confidence in their ideas, which I think is at the heart of most early writers' struggles with writing is that they worry that what's going on in their head is not transferable through their own means to written communication. And so I guess what I would say to every teacher, but I wouldn't do it because I don't really see that as my job, but is think about learning and think about writing and the way that you practice it in your own life and what it does for you and bring that to the classroom with as much honesty and compassion for your students as you can."
+      },
+      {
+        q: "What have been some negative consequences of Generative AI on writing teachers?",
+        audio: "audio/forgette/7.mp3",
+        transcript: "Yeah. I think it's shaken people's confidence, also their joy in teaching. I had one colleague describe describe it as play acting. They pretend like they're writing. I pretend like I'm reading their writing. And, honestly, that nobody wants to do that. I mean, maybe somebody wants to do it. I don't know. But to me, the joy is, like, seeing a student really struggling, struggling, struggling, struggling to articulate what is going on in their head. And if you bypass that, in my opinion, you bypass what a writing class is for."
+      },
+      {
+        q: "Do you see any benefits to this kind of technology?",
+        audio: "audio/forgette/8.mp3",
+        transcript: "Ai has lots of wonderful applications in the medical field. I think it has lots of wonderful applications in engineering and and all that kind of stuff. But but I'm not working with my students when they are professionals, and I'm also not a vocational trainer. I am a person who is helping students gain confidence in their own abilities, in their own thinking, and in their own ability to communicate their own thinking. And so for me in the educational space, anything that keeps students from that struggle is not productive."
+      },
+      {
+        q: "Does Generative AI have a role in upper-division writing courses?",
+        audio: "audio/forgette/9.mp3",
+        transcript: "No. Well, I mean, I'm just speaking from the experience of teaching writing in the health professions. Because one of the ways that we frame that class is very much understanding how communication happens between human beings. Because most of those students are are going into nursing, and they are going to be patient communicators. And so one of the things we really try to do in that class is to teach them how to translate language for a more public audience in an accurate and authentic way. And people could say, Oh, well, yeah, I can do that for you. You know, describe this as if you were someone who had no medical background. But nurses work with human beings in the moment, and they need to, in the moment, be able to express themselves clearly in ways that their audience will be able to understand. And so, you know, I can see how AI tools can work when they are professionals, you know, helping them understand things. But in terms of the kind of skills that we're teaching them in that class, I don't see it. I see the exact same problems. And in fact, maybe worse because I feel like they really don't have confidence in their ability to understand scientific writing. And it is super difficult to understand, And you do have to wrestle with it. There's just no other way to do it. But the wrestle is the learning. And when you eliminate the struggle, in my opinion, in the way that I think about writing, in the way that I think about communicating, when you eliminate that, it's like going to the gym, turning on the the treadmill, and not walking on. Just letting the treadmill run for thirty minutes and then saying done."
+      },
+      {
+        q: "How is Generative AI hurting student writing?",
+        audio: "audio/forgette/10.mp3",
+        transcript: "I think every time that student has used AI in my class and I've had to have conversation with a student, I think every time it's hurt them, number one, because they lose there's no agency in the product. It's it's something else's product. So, I mean, I would argue that it it's always problematic."
+      },
+      {
+        q: "Should writing teachers be AI literate?",
+        audio: "audio/forgette/11.mp3",
+        transcript: "I'm struggling to answer that because there's I think there's a difference between learn about a tool, right, which to me, again, is very much in that vocational educational realm and not really the realm of higher education. And I I recognize that higher education has changed in the time that I've been in it and that it's become more transactional. But in in its best form, like, it's doing the best job it can, not about tools. It's about students gaining confidence in their ability to think and to communicate well and with facility and with flexibility and a willingness to work at it and to wrestle. And I think so, yeah, for anybody, any human being who is trying to understand something in a society that is a force, do I think it's important for someone to study it and read about it and think about it? Yes. 100%. And I would say that for anything. And I do think this was problematic in terms of smartphones. Think, again, there was this sort of like, sure. Let's use it. Maybe it'll help. So I think we should have thought about that more before we let Apple buy these devices for every underprivileged classroom in America. But I I also think maybe we need to learn from our mistakes too."
+      },
+      {
+        q: "Can writing teachers actually prevent students from using Generative AI?",
+        audio: "audio/forgette/12.mp3",
+        transcript: "I don't wanna control what they're doing in the rest of their lives. I just wanna think about what they're doing in my classroom and the and and the way that that writing unfolds in my classroom. And, you know, I'm not I'm not the provost of the university, and I don't I don't wanna be. I mean, I think that's that's that's not where I put my energy and my focus. And the one thing that I think is embedded in that statement is this assumption that this is inevitable. It is not inevitable that every writing classroom must incorporate these tools. That is not inevitable. That's ridiculous. That's that's like saying every writing class will use exactly the same book."
+      },
+        {
+        q: "Should we try to prohibit Generative AI use by students? Should be police them more aggressively?",
+        audio: "audio/forgette/13.mp3",
+        transcript: "It's not a war for me. It my vision of the writing classroom is that students learn to listen to what's going on in their heads, to struggle with the ideas that are in their heads, to listen to the patterns and recognize their own voice, and to communicate that in a way that a reader responds to. So maybe it's maybe I'm naive as to what's happening with my students, but but, honestly, I think they they they like their own voices. They like their own ideas. They they like it when they say something that makes somebody else in class respond just because it was well constructed and really you could hear that person's passion chain of logic. So I'm not at war with my students. I just design the class to work in the way that as somebody who's been a writer for my entire professional life and somebody who's taught writing for a long time, for the ways that I know writing can help them really gain confidence in that beautiful, flexible brain that is in their bodies."
+      },
+      {
+        q: "What are your biggest concerns about incorporating Generative AI into our classrooms?",
+        audio: "audio/forgette/14.mp3",
+        transcript: "The thing that hasn't gone along with that are the larger implications. You can sell them that tool to do a little Google search, but have you talked to them about the environmental impact of that? Have you talked to them about the global impact of that in terms of workers? You know, we pride ourselves on sort of being able to think critically about the multiplicity of effects of things. And sometimes, and, again, this is probably an assumption I'm making. Maybe that person has had that conversation, and I just haven't heard that conversation. But to me, if you're going to say, sure. Use this thing. Then I think you also need to think about all of the water that takes, all of the energy that's coming off the grid, all the people in underdeveloped countries who are being exploited in order for that to happen, the lack of regulation that the larger society has for this."
+      },
+      {
+        q: "Are EdTech companies behaving ethically?",
+        audio: "audio/forgette/15.mp3",
+        transcript: "When tech companies have stepped into educational space, it has had some good effects, but it has also had some extremely negative effects. And I think they've covered that with giving this stuff away. In my opinion, there is nothing about that world that is coming for free. It is all about addicting people to their products. And through that addiction hindering and maybe just obliterating the learning that is supposedly facilitated by these tools."
+      }
+    ]
+  },
+   {
+    name: "Amber King",
+    role: "Teacher, Enthusiast, Innovator",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/king.png",
+    quote: "I do think you can use AI ethically, just like you can use Word ethically.",
+    questions: [
+      {
+        q: "What has been your general approach to Generative AI in the classroom?",
+        audio: "audio/king/1.mp3",
+        transcript: "So the first time I remember seeing it was at the very December 2022. I had some students who had been kind of hit or miss all semester, and when they turned in their final reflective essays, I knew something was up. And we had been kind of talking about it in the department, but we thought it wasn't something we would have to deal with yet. We just been kinda hearing about it. So once I started seeing it in their writing, and it's I mean, it's not something that you can prove. Right? I thought, oh, this is gonna be a battle. Those are and I hate to go into the classroom and feel like I have to be suspicious of everybody and, you know, have this negative relationship. So pretty quickly, I started thinking about how to incorporate it in helpful ways so I wasn't fighting students. And so that's kind of what I've been trying to do ever since then, sometimes succeeding and sometimes not."
+      },
+      {
+        q: "How has your opinion about AI in the classroom changed?",
+        audio: "audio/king/2.mp3",
+        transcript: "So I wanna start with the second question. My opinion changes very frequently, but that's about, you know, every semester students are different. They're different from August to December. And so sometimes we'll be leaning in and then I'll start to think, we're getting too far, and let's take this in kind of a different direction. So my opinion changes frequently, and that's not just about AI. It's about everything. But as far as the role in the classroom, I honestly so I listen to a lot of AI podcasts, and my favorite one is AI in the future of work with Dan Turchin. I don't know if y'all listen to that, but I recommend it. You listen to it? So I love that one. And I like that it's about being human centered. And one thing I love about Dan Turchin is that he he really emphasizes the role of the humanities in navigating AI. And so that I really kinda come from that perspective, but that's with all technology. You know? I mean, even like using Word, when you teach students how to format Word, and they're like, why do we have to make all these changes? Why isn't it just that way? And I tell them what's because writing teachers didn't design it. You know, we're always adapting things for our classes. And I think it's the same with AI. It's moving faster. So we have to work a little harder, a lot harder, to stay on top of it. But I honestly think that we're always having to adapt anyway. And I don't, at this point, I don't really see it introducing a lot of new problems, just kind of new faces on old problems, you know. So I think it has just as much a role as any other technology."
+      },
+      {
+        q: "What about your colleagues? Have you learned lessons from them?",
+        audio: "audio/king/3.mp3",
+        transcript: "So, obviously I'm mainly discussing it with folks in the co rec, you know, and we have, with the evaluation that we're doing right now, we are having them write things with AI and then evaluate those things and see, is there anything here I wanna keep? Do I wanna toss this and start from scratch? It doesn't have two examples in there that I really like, and I wanna get rid of everything else and develop those things. Just kind of figuring out how they wanna use it. And be because we are doing that, that makes me feel really free to to go wherever wherever I wanna go with AI as as long as we're meeting the goals of the of the course. And I I like that because I feel like I know where I stand. I feel like I know what the baseline is and what the expectations are. If I were not in this in the co rec program, I would maybe have more anxiety about it, And I would wonder more about what other people are doing and am I way out of step. Within our cohort, my job was to look at AI and work because it overlapped with something I was already working on. And I'm so glad that that happened. It really gave me a lot of insight into just where society is headed, where the workforce is headed, what the expectations are. And again, I felt like I was safe in exploring that because I knew that that was what our cohort was working on, trying to figure out, you know, how to teach students to to to find their own way to use it ethically. "
+      },
+      {
+        q: "Do you have hope for students benefiting from AI in the future?",
+        audio: "audio/king/4.mp3",
+        transcript: "That is the hardest part of writing, figuring out you're really only about halfway through the writing process when you get a rough draft. But you you've put so much time into it, and you're so married to those ideas that continuing to go through the writing process can be really challenging. And I think that AI can be really helpful for that. And I'm thinking about particularly Lex when you use the option where you say check for wordiness. And you literally go phrase by phrase and you make choices about what you wanna do rather than just letting it revise for you and you lose your voice. I've used that before when I've made examples for students because I know I get wordy, and I'm not trying to teach them how to be wordy. But then I also show them how to use Lex to get rid of repetition, that kind of thing. So as far as in the future, what I would love to see and maybe you can do this now, and I just don't know. But what I would love to see would be for people to be able to, like, for example, talk through their ideas. Just talk out loud and have AI take notes and then give them back an outline. And then they think about, oh, you know, do they like that order? Do they see well, you've taken this one point, you divide it into two, and you totally skip that point. But I think it would help them to make more informed choices because they're not thinking about things in the abstract. They have that that literal outline that they can evaluate and adjust. So I would like to see more tools that are specifically designed for the writing process and getting started in the writing process and then cleaning up the writing at the end."
+      },
+      {
+        q: "How are your students using AI now?",
+        audio: "audio/king/5.mp3",
+        transcript: "what my students are saying to me is that they use it a lot to get ideas. A lot of my students seem to use it more toward the the beginning of the writing process and not so much toward the end, which I really like because that gives them a lot of time to get their own voice in there. And then there are still some, you know, grammar differences, which is what I have now started saying instead of grammar errors. Grammar differences that I think that's a part of their voice. Right? And so I I seen more of their voice even just in their sentence structure and their word choices if they use it more toward the beginning. One thing that we did in my class was I did a survey, and then we did some we did about two weeks of activities. We did an AI unit, just a short unit. And at the end, I took all of their feedback that they had done for two weeks, and I put it into a slideshow and then had Notebook LM make a video of it. And we watched the video together and we did reflective exercise with it. And then I had them compare the video with the slideshow and talk about kind of how their ideas compared to their classmates ideas. And I think that was really affirming for them because everybody assumes everybody else is using it. And what they saw was that most people in their in their class are skeptical. Most of their peers are skeptical. They like certain things about it, but they're really skeptical about other things. And I think that makes them feel like, well, I'm not pressured to use it and have this perfect paper because my my classmates aren't either. The ones who do use it and have the perfect paper, they're the outliers and my teacher to know that that's what they're doing"
+      },
+      {
+        q: "What are the limitations of AI? Do you think it hurts or helps students overall?",
+        audio: "audio/king/6.mp3",
+        transcript: "Well, obviously that's a nuanced question, but overall, if I had to generalize, by and large, I would say no, because the students who are cheaters are cheaters are cheaters, you know? And this if you want to cheat, this is just another way to cheat, but there are so many other ways to cheat. And I when I was having some issues with my son when he was very young, because, you know, he has lots of diagnoses and lots of struggles. I read this book that was about this specific Japanese parenting philosophy. And the basic idea was that kids are always doing the best they can. And they're never just trying to cause problems. They're never trying to break the rules. Most children. And so if you keep having problems, you have to look at what is what's the barrier that they keep running into. Right? And so I think that when when students cheat, it's because they keep hitting some kind of barrier. And that barrier might just be their lack of motivation or, you know, whatever. And and having access to AI is not creating new barriers for them to run into. So I what I'm not seeing an increase in cheating as long as they know how to use it and they're able to make informed decisions. Now people are using it to cheat, but again, are the people who would probably already be cheating or wouldn't be turning in anything."
+      },
+      {
+        q: "Do developing writers use AI differently than advanced writers?",
+        audio: "audio/king/7.mp3",
+        transcript: "My students who have the lower test scores who test into the co-req seem to be more aware of their struggles and their questions. Like, I I told them, you know, we're about to move from reflection into academic writing. I'm gonna grade it differently. They're gonna be different expectations, and I kinda listed some of them out. And I said, what are your experiences with these? What concerns do you have moving forward? And it was there was a pretty clear difference. So that does affect the way that they're using AI because the ones who know what their weaknesses are, they have a better idea of how to use it. Whereas the other ones are gonna need to explore more, right, and figure out where their gaps are and use AI to fill in those gaps. So I think that that definitely is a factor. And we incorporated a lot into writing 100, whereas in DS 94, I've got it embedded in one of the reading strategies couple of the reading strategies that they can use to help them understand when they run into something that they are struggling with or bored with or whatever. But it's just I've just gotten there as a part of reading, not as a part of writing because we're writing paragraphs. You know? Like, you don't I don't think there's a lot of room for AI in a paragraph. You know? But there is room for AI when you're interacting with the text. So just the way I'm teaching it is different, but also the way I'm seeing them use it. It's like they recognize that they don't know what they need to know in order to use it effectively."
+      },
+      {
+        q: "How are student opinions about AI changing?",
+        audio: "audio/king/8.mp3",
+        transcript: "So I did a survey at the beginning of last semester as well. And last semester, in every class, I had a handful of students who had not used AI and were very skeptical of it, were not interested in it. This semester, 100% of them had used AI and had a level of comfort with it, and they still had some skepticism. They didn't have a lot of understanding of how it works. So when we went through and we played some games and we did some activities and they started to see, well, we're all getting basically the same answers. Why are we all getting basically the same answers? And one of the activities that we did was, you know, that old activity where you you have a picture and you write out the directions for drawing that picture. Right? But and you don't say what it is, and you just give shapes and and relations. So we did that. And they gave their directions to another group of humans, and they gave it to AI, and we compared the results. Now a cat in a house, AI nailed. The cat was perfect. Looked just like the original. But the campsite was like some geometric explosion and some of the things that it just had no idea about. And so that gave us a really good opportunity to think about if people are doing a lot with cats and cat art, obviously AI can draw a cat. But if people aren't using it, they said they're gonna draw all these other things, they didn't know a lot about it. Right? And so we we did these things with images, and then we said, well, how does this apply to words? How does this apply to ideas, to sentence structure, to vocabulary? And I think that that was really insightful for them. I had a lot of really good reflections on that, and it increased their skepticism."
+      },
+      {
+        q: "What about the ethical implications of using AI in the classroom?",
+        audio: "audio/king/9.mp3",
+        transcript: "I do think you can use AI ethically just like you can use word ethically. You know? Like, when I first started college in 1997, I had a typewriter not a computer.And anytime I had a typo, I ran out of the ribbon, the correction ribbon. So anytime I had a typo, had to start over completely with that page. And so I had to be super, super careful. Now once I was working on a computer, I didn't have to be super careful anymore. Was that ethical for me to use a computer and not have to be super careful anymore? Sure. It made sense for me to do that. It saved a lot of time. I could think more about my words and my ideas and less about what what stroke I'm making. Right? So I think that a big part of it is just thinking about why are we using it? What are we trying to accomplish? And a big thing for me as a person, and this is I'm making a big shift here. But for me as a person with a strong developmental background and, of course, with this son who has a lot of challenges that have really informed my teaching. I think that, as I've said, it can fill in those gaps. So, like, for my son, if he had a reading assignment now he's a very good reader. But if he had a reading assignment and he saw a full page of text, he would shut down. He was not reading it. If I would take it and cut it up into strips and hand him a strip at a time, he would zoom right through it. If I would download the text and have an app read it aloud and he would read along and we adjusted it. Now this was before all the AI things you can do with voice, but we we adjusted the voice so it sounded like a child. And then he liked that. And so he would read along, and he was comprehending and he could answer questions. So this was like filling in those gaps where he could succeed and he would do the things and he would learn the things and then he would do really well on the tests. And we weren't fighting, you know, this wasn't my whole afternoon. And so I think that we can do that even more now with AI. And again, it's not saying AI is going do this thing for you. It's saying you're going to work with AI to learn how to do this thing. And then you're gonna look back and see what you did. And now you have an idea of how to do it, and you can move to the next step that you would not have gotten to previously. So I think as far as students with gaps, just most students now post COVID, I think that it it can definitely be really helpful."
+      }
+
+    ]
+  },
+  {
+    name: "Ellen Shelton",
+    role: "Teacher, Scholar, Administrator",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/shelton.png",
+    quote: "They're trying to figure out what to do, and that's a challenge for them.",
+    questions: [
+      {
+        q: "How is AI changing your practice as a writing teacher?",
+        audio: "audio/shelton/1.mp3",
+        transcript: "I think AI is an interesting tool to maybe help students see a nuance of an argument they hadn't thought about. As a brainstorming technique, I worry about students becoming too reliant upon it. I'm also coming from a very strong expressivist background of writing into the day, writing as discovery, writing as sort of the moments that would not happen on an AI situation, you know, a generative AI. I do think it helps students see like different nuances of arguments, especially students that are beginning conversations in writing and developing an argument. I think it helps them see that things aren't as simple as a black and white argument, that there are nuances that you have to do, are gray areas like the young gentleman who came to interview me about if the writing center had more money, would we be able to offer more spots and times? And his assumption was yes, and I said, of course, I would love more money. But the reality is, it's much different from that. And he said, and he actually admitted he said, I used AI for some of this. And he said, I never knew about scheduling, budgeting, and I never knew about, never thought about. So I think there are areas that can be really helpful. But you lose voice, you lose that authenticity, you lose that thinking. As an instructor, I don't encourage it for my 300 level because it's a composition theory course, but I also am encouraging to write really messy documents. I'm writing them to develop their own pieces, so I'm moving away from those more traditional I've I've never really taught those traditional forms, but I've really kind of emphasized, like, what you do in your discussion board is it comes from your writing into the day, which feeds into your concept papers, which I want you to use that first person organic and explore and question and wonder what you're not going to find in an AI. "
+      },
+      {
+        q: "Do you use AI yourself as a writer and researcher?",
+        audio: "audio/shelton/2.mp3",
+        transcript: "For me as a researcher and a writer, I am old school. I'm going to go with my own. I will say I am terrible at creating titles, and I did use AI to help generate, I've got a couple of presentations coming up at a conference, and all of mine sound incredibly non interesting. So AI does help me, I won't zhuzh it up, it does help me rethink a little bit about what I could put in that respect."
+      },
+      {
+        q: "You direct a large writing center. How are you and your consultants dealing with AI?",
+        audio: "audio/shelton/3.mp3",
+        transcript: "So as a writing center director, though, we're really in this interesting space that because this institution doesn't have a policy overall, like most institutions at this point don't, and it's really up to each individual instructor that creates that creates a level of friction that we're having to work through in the writing center itself of you have some faculty members on this campus that are touch it and die. You have others who simply say, you know, they equate it to plagiarism. You have others who say, if you use AI, you must disclose. And then we have other instructors who say, write this paper in AI and then reflect backwards on how it would be different from what you have written. So what do you do, right, as a writing center director who has 35 consultants trying to explain to peer consultants, how do you have this conversation? And one of the things we are very careful with is what in the intake like high getting to know the student is, tell me about your instructor's AI policy initially. Tell me what is allowable, tell me what you're doing, did you use it, did you not, and what the student discloses are not, that's fine.If you suspect a student of it, then encourage them like this is not sounding like your voice. How did you come up with a lot of talking about process? Which I do speak quite a bit about in my three zero one classes, the preparation course writing three zero one, responding to writers, is the course the students take, and we talk about your own process. Their first paper is a documentation of their own process, and you get to know your process so you can talk with others about it and how do you have those conversations. Sometimes it comes out that they just used AI, and they're realizing why the paper's not working."
+      },
+      {
+        q: "Should writing center consultants police AI use?",
+        audio: "audio/shelton/4.mp3",
+        transcript: "One thing that came up last year was, is it the responsibility of the writing center to disclose to an instructor if a student has admitted AI? And the other writing center directors here and I talked about that because my reaction was no. Because what if that student realizes that's a problem and now you've biased that teacher? But whatever happens within the consultation, it stays within the consultation. And we talked about the ethics of that. And then I talked with the students about that. And they agreed because what if they encourage the student to change? I think once we we do talk a lot with our students, our writing center consultants about you're not an AI detector. That is not your job. Your job is to help the writer. "
+      },
+      {
+        q: "Is Generative AI a future threat to writing centers?",
+        audio: "audio/shelton/5.mp3",
+        transcript: "I think it is something we have to negotiate. I think if we approach it as a threat, then we're automatically setting ourselves against it. I have seen several discussions and several publications lately regarding AI. IWCA has a task force on AI. That was actually a conversation that was being had, I think in one of the most recent journals was, will AI replace the writing center tutor? I think what you lose in the discussion of a consultation, that human interaction, that revision, that conversation, I think about the classes, you mentioned that I just finished a degree. What I love so much is not the reading, not the work, it was the conversations that you have that you gained so much more. I think students, the more that we see, even AI and other areas, they want to come in and have those conversations. Are they affecting us in the writing center? I think to a certain extent, we are not getting as many brainstorming sessions as we used to. I also see more instructors who were scared of AI, so they're assigning more in class writing. So I think maybe it's a way of instead of being seeing it as a threat, think understanding there will have to be something of a shift within writing center work that we will have to negotiate at some point."
+      },
+      {
+        q: "What are some ethical considerations around Generative AI for faculty members?",
+        audio: "audio/shelton/6.mp3",
+        transcript: "As an instructor, I actually just wrote a fellowship application, a recommendation letter for someone post baccalaureate. And after I submitted the letter, the next question before I had this was able to final submit was, did you use AI to write any of this recommendation letter? And I didn't, you know, but it also made me think does that negate the student's recommendation or not. It it kinda gave me a pause actually to go more in the lines of that's really interesting, and if I'm writing a letter as a letter of recommendation for a student, what is the ethical stance of, in my space, of am I really writing about the student and my interactions and is it an authentic discussion of what the student is capable of if it is not written by me? "
+      },
+      {
+        q: "When it comes to writing recommendations, is there a difference between boilerplate language and AI-generated language?",
+        audio: "audio/shelton/7.mp3",
+        transcript: "You know, if you are one of those folks that ends up being really hit with a lot of recommendation letters, usually within like a little bitty window, we do have a tendency to fall back on those things that we've written before and done. I, you know, as the writing center director, as a teacher, I have a few sentences, like, here's the framing that I keep, and then I change it from there. But then I'm also like, you know, okay, wait, hold on. How long about you, you know, use that? Not quite the same. I need to shift this around a little bit. As someone who works with students writing, right now, the graduate research fellowship program for MSF, they're writing those proposals. One of the students that I'm working with on her personal statement have had an instructor tell her, you need to run this through AI to convince your to make your text sound, you know, to make it sound more a little less student y, if that makes any sense. And she asked me about it, she was really upset. And I simply said, listen, this is your document. You have the authority as the writer. They also know that you are a student. This is not for publication in a scientific journal. I think you need to do what you feel comfortable with. If you want to run it and see what you think, you don't have to use it. But at the same time, that is ultimately your decision. So I will be interested on meeting with her later on this week to see what she decided to do."
+      },
+      {
+        q: "Have you picked up any good ideas from your colleagues related to teaching with AI?",
+        audio: "audio/shelton/8.mp3",
+        transcript: "I think it's those conversations that we have. You know, we've had some amazing trainings. Incredibly appreciative of this department of Mark Watkins of being able to like not feel like it, you know, I'm not a tech lettie, actually, I love all the tech. But at the same time, not walking in going, wait, what? To so many different things. I feel like I'm entering into a space where I can have those conversations and not feel like I've been left behind in this conversation. But I think it's those hallway conversations, those conversations of when a faculty member comes into the center just seeing me sitting outside, sitting down having a cup of coffee, or they just see me saying, hey, my students are coming to the writing center. And here's what we're, you know, here's what I'm thinking about trying, what do you think? And just the conversations I have with the kids, our consultants about that. I really appreciate the diversity. And you know, when the kids do sort of say, our consultants say, I wish we had a policy. I'm like, but at the same time, I feel like there is that instructor authority, just like we say to the writers, of, and we all frame our assignments differently, even if you teach the same course in the same, you're teaching like argument writing came in. But there's so many variations on that thing because how you teach is so individualistic. I think I appreciate that ability to try experiment, but then also go to this person and say, hey, I heard that you're doing this in your classroom, or I would like to see what that looks like for you. Or have you thought about adding? But I think I appreciate the openness of having that, being able to have that conversation in this space, be that in a meeting, be that in a hallway, or sitting around while we're waiting for another thing to get started, right, of what are you doing and why. "
+      },
+      {
+        q: "What are your biggest worries about Generative AI?",
+        audio: "audio/shelton/9.mp3",
+        transcript: "I think it's the critical thinking process and AI taking over that that does concern me, Because you have to problem solve, you have to think through, you have to think about the if, the whats. And there is something in that process of looking at your paper, and that true revision that has to happen, not editing, but that true revision that has to happen, and really understanding where you're going with it, that you have to work through that yourself to become a better writer, You have to work through that yourself to become a better communicator. You can't run that marathon if you don't run a mile, you know, or two or three. You have to exercise that in that process. You have to exercise what that is, and if AI takes that over for you, it's it's not going to develop that skill set for you as a critical thinker, as a critical writer. I think it's an exercise. It's almost like you're going to edit this out, but I think the analogy may work for me is you put my step tracker on my cat and put it on a treadmill, right? And then turn around and say, I just ran a marathon, right? That's almost the same. Not that Lucy would, but I think it's the same like you again, if you don't practice that, if you don't write even small spurts a day, if you don't do these things, you can't write that larger paper, you will not be able to produce that grant application, you will not be able to write that memo that actually may make the difference of whether or not you get that account in a situation."
+      },
+      {
+        q: "How are your students and consultants thinking about AI?",
+        audio: "audio/shelton/10.mp3",
+        transcript: "You know, I think we make a mistake when we talk about our students, this generation as tech natives, as digital natives. I think they are what we are seeing in the Writing Center is they are digital natives to their phones, but they're not digital natives to the programs and the processing that we use. They're digital natives maybe to social media. Think the students in many ways are confused that they don't really know what to do because everybody has its different policies. We also have instructors that don't articulate policies across the board. They also, it feels like yet another tool they're not sure what to do with in many ways. Do I think students are using it? Sure. Are they using it to help summarize an article that they need to read? I've actually heard that from researchers. Again, to me that's another skill set that needs to be exercised on a regular basis, but I also understand if you're looking at trying to synthesize a 30 page article, do I read this or not? Synthesize it down, give me a summary. Okay, fine. And then you see what it is. If it helps them actually to read an article better to be able to use it and go back into it to get the gist of It's kind of like a bigger abstract. I think the kids are also dying for someone, they're really struggling, that they want someone to help to help them see how to use it well. I think that's where we are. They don't know how to use it ethically, they know it's out there, they know they can, they have access to it. They know that some people say it's bad, some people say it's fabulous, but they don't actually know what to do with it in many cases. So they're making up their own rules, "
+      },
+      {
+        q: "What are your main takeaways from this conversation as a veteran educator?",
+        audio: "audio/shelton/11.mp3",
+        transcript: "I think I have been in education long enough. This is year 34. I have seen so many educational crises in K12 and higher ed, and you know what, we're still writing, We're still reading. We're still thinking. It looks different. I don't I'm not a gloom and doom. I'm not a champion of AI, of generative AI. Do I think it is a tool we can figure out? Yes, but I think we're at the beginning of it. So I think the question is how do we adapt in this space for this place? I also know we have survived many educational crises along the way, and yeah, we've had to change what we're doing to a certain extent, but we're still writing, we're still thinking, we're still talking, so at this point, I think we'll see where it goes."
+      }
+    ]
+  },
+  {
+    name: "Sarah Ligon",
+    role: "Student, Writer, Teacher",
+    color: "#8a4a2e",
+    initials: "MW",
+    avatarUrl: "images/ligon.png",
+    quote: "I was unprepared for how emotional I would feel about it.",
+    questions: [
+      {
+        q: "How are you coping with Generative AI in your classroom?",
+        audio: "audio/ligon/1.mp3",
+        transcript: "I was unprepared for how emotional I would feel about it. Because I am also a writer, I value creative writing very highly, and I found that I take it very personally when my students use AI if we've discussed them not using it before. Because I think it is such a great and noble good to be aspiring to be a better writer. I do take it very personally when they do it otherwise. This was a change in the landscape that could not have come at a worse time for me because I'm a first time teacher. I'm still getting my bearings in the classroom, and I am not an adept at technology. So it was a really steep learning curve for me to find my way around the technology, figure out how they're using it, try and troubleshoot problems down the road, and hopefully help them navigate responsible ways to do it in the classroom."
+      },
+      {
+        q: "How is your experience in first-year writing different from your previous work as a TA in terms of AI use?",
+        audio: "audio/ligon/2.mp3",
+        transcript: "I'll go chronologically. My first semester as a TA, this was two and a half years ago, it was a big deal. We didn't know how to deal with it. And so my professors were just trying to create safeguards against students using it, right? That changed radically what we did in the English classroom. No longer were students doing any sort of writing outside of short answers on a timed exam. We weren't giving them any feedback on their writing, and everything shifted to short answer and multiple choice. So I was really looking forward to transitioning to a writing classroom so I could do more of the thing that I like. But I was also terrified because in the meantime, I had had no experience dealing with AI in the classroom because in the English class room, we just stepped around the problem. So I spent a lot of time in our pedagogy class last spring thinking through what I wanted to do in the classroom and just kinda getting up to speed on what AI in the classroom looks like. So I kind of came up with a few things that were really important to me.One was that I wanted to have a conversation with the students, like, from day one and make it a true conversation, asking them, like, what do you use AI for? What could be the affordances or hindrances to you in a writing classroom? And how can we agree on, like, responsible ways to do that? And we did do that. We could have spent even more time on it. We spent probably a class and a half, so that's, like, ninety minutes. And we collaborated to create a an addendum to our syllabus on AI use. And they asked for a little more than I was willing to give, but I I wanted to try the experiment of doing it the way they pretty they had a pretty clear consensus on how they wanted to use AI. And that that was that it would be fine for research. It would be fine for helping with transitions and counterargument and feedback on their writing, but we could all agree that it shouldn't be used to rewrite whole paragraphs or your whole paper."
+      },
+      {
+        q: "How have you learned to talk to students about their AI use one-on-one?",
+        audio: "audio/ligon/3.mp3",
+        transcript: "I have to admit when I got my personal essay assignments back and started grading them, and I found a couple of essays that I felt were clearly, had used more AI than we had agreed after for that first essay I'd asked them, please don't use AI on this. Right? This is a personal essay. We did it mostly through in class exercises. It was very low stakes. I said I really just wanted to hear their voices. So when I got a couple back, I was I took it harder than I expected. So for my next essay assignment, I reiterated our policy, talked about, like, more of the value in doing the work themselves, and accidentally just scheduled our midterm class conferences between when they turned in the rough drafts and when their final drafts of their analysis paper was due. I hadn't intended for that to happen, but it gave me a great opportunity to read their rough drafts before our meetings. And when I saw papers that again had misused AI, I could have that conversation with them. And I was very nervous about it being confrontational, but it turned out not to be at all. I would just ask them, hey. Seems like maybe you need an AI citation to this paper. Let's talk about, like, what you did and how we might do it. And no one said, no. Actually, I didn't. They said, oh, yeah. I guess I probably do. What does that look like? That was a great opportunity to talk with them about why they were doing it, and I learned so much from them about their reasons for using it and their lack of understanding about it that I think I will try and do that every semester."
+      },
+      {
+        q: "Have you picked up any good ideas from your colleagues? Have they been supportive?",
+        audio: "audio/ligon/4.mp3",
+        transcript: "I have to say this is a great department and that there's a lot of professionalization and a lot of, like, built in circles and networks to talk to people that is not true in other departments. So I've had lots of people I can talk to about this. From Gretchen, who leads our teaching circle, I learned about her assignment for the analysis paper, which I think really brilliantly sidesteps AI use, from Amber Nichols Buckley. I learned about her assignment for the personal essay, which I think is just so personally valuable to students. And she's created an an atmosphere in her classroom, I think, that is very warm and supportive. And she makes that first paper very low stakes that I would be surprised if anyone, used AI on that paper. And that's definitely, although I allow them to use some AI, I would prefer that they never did. So those are the the strategies that I'm looking to add to my repertoire. And also just hearing from the other novice teachers in my teaching circle, like, how many AI papers did you see on that analysis paper, and why do you think they did it, and what are you gonna do differently next time, has been really valuable so that I take it less personally if they're getting the same number of AI papers."
+      },
+      {
+        q: "Can students benefit from using Generative AI? Have you seen any specific examples?",
+        audio: "audio/ligon/5.mp3",
+        transcript: "When I asked my students how they used it, I was surprised that many of them use it for just simple life hacking, like figuring out their schedules and when they should do things and reminders and best practices, and I can't judge them for that. Other students use it for brainstorming and AI, for brainstorming. That's never been useful for me, so I was surprised, but I also think that that's pretty fair game. The other uses that it could be good for, although the pitfalls almost outweigh it, are students who have been disadvantaged in their K through 12 education, I really feel for them coming into a classroom because I can kind of see the panic in their eyes on some of these larger papers. And I can see why they would want to use AI to make their work better in the way they think it has to be in order to get a good grade. So I do see potential for AI to help with that achievement gap if you're really critical about how you're using it to learn from it. I haven't figured out how to learn from AI yet, so I certainly don't know how to teach them how to do that. And just, the pitfalls in doing that. I had this one student who used AI on both of her papers, and she falls into that category. And she was using Grammarly where she would write a sentence and then Grammarly would immediately reword it for her and finish her thought. And she honestly did not know how to change those settings. So in our conference, I sat with her and I couldn't figure out how to change the settings for her because she's working in a Microsoft world, which is foreign to me. But I did just try and articulate to her, like, why this was not ultimately going to help her because it was making her writing sound not like her. It was they were not her own thoughts at some point, and that she actually had really valuable thoughts and a very unique voice that I would like to hear."
+      },
+      {
+        q: "How have student attitudes about AI changed?",
+        audio: "audio/ligon/6.mp3",
+        transcript: "I think early on, the kids were pretty secretive about it and pretty excited about it, and they are not secretive about it anymore. And I hear many more students being critical of it. I have one student who I was really I guess I misjudged him. I really expected he was gonna turn in an AI generated paper, but he did not. It was clearly his own voice, and it sounded there were two of them actually. Sounded just like their spoken voice. And I was so buoyed by that. But when I was talking with one of them just generally about AI, he's like, oh, no, ma'am. I would never use that. I am scared of it. It just feels like a really slippery slope. So I'm hearing a lot more critical voices than I did early on."
+      },
+      {
+        q: "What are your plans for experimenting with AI in the future?",
+        audio: "audio/ligon/7.mp3",
+        transcript: "I do think I would like to try a semester where I ban AI in the classroom, see what that looks like. I would also like to try being a little more preachy without being preachy about what writing is and what it can do for you if you really let yourself learn the process. Haven't figured out how to toe that line because I struggle with it with my own kids who you know, I have three teenagers at home who also occasionally use AI and don't do the readings, and my being preaching with them does not work. So, I'm trying to figure out how to have these conversations like, you know, writing is how we think. You know, writing is where your voice comes through. Writing is an iterative process that you will never finish, and you just have to keep working at it, but that working is the value in it. So those are conversations I'm not having in the classroom yet because I haven't figured out how to do it in a way that's not preachy, but I would like to spend more time on that."
+      },
+      {
+        q: "Any other teaching ideas you would like to share?",
+        audio: "audio/ligon/8.mp3",
+        transcript: "One thing that I'm loving that we're doing is that we're doing handwritten journals at the beginning of each class. We spend about ten minutes, and then we'll really briefly share about it. And we journal about things that are reflective about writing that they might be able to build upon for their final assignment or brainstorming on current assignments. But probably half the time, we're just reflecting on life and this semester and what it means to be a person in the world, and that has gone surprisingly well. And I wanna keep that as a practice and figure out and help connect the dots for them more obviously what value this could have. Like, just that every thoughtful person I've known and worked for always keeps some sort of notebook in which they jot down their thoughts. And it can look like many different things, but they all do it. And it's the only through line that I've seen through all of these successful people. So I think that's something that I could get them excited about."
+      }
+    ]
+  }
+
+];
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+function buildCard(person, personIndex) {
+  const card = document.createElement('article');
+  card.className = 'person-card';
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'person-header';
+
+  const avatarWrap = document.createElement('div');
+  avatarWrap.className = 'avatar-wrap';
+  const img = document.createElement('img');
+  img.className = 'avatar';
+  img.src = person.avatarUrl;
+  img.alt = person.name;
+  avatarWrap.appendChild(img);
+
+  const meta = document.createElement('div');
+  meta.className = 'person-meta';
+  meta.innerHTML = `<div class="person-name">${person.name}</div><div class="person-role">${person.role}</div>`;
+
+  header.appendChild(avatarWrap);
+  header.appendChild(meta);
+  card.appendChild(header);
+
+  const quoteEl = document.createElement('p');
+  quoteEl.className = 'person-quote';
+  quoteEl.textContent = `"${person.quote}"`;
+  card.appendChild(quoteEl);
+
+  // Questions section toggle button
+  const questionsToggle = document.createElement('button');
+  questionsToggle.className = 'questions-toggle';
+  questionsToggle.setAttribute('aria-expanded', 'false');
+  questionsToggle.innerHTML = `<span>Questions &amp; Responses</span>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>`;
+  card.appendChild(questionsToggle);
+
+  // Collapsible wrapper
+  const questionsSection = document.createElement('div');
+  questionsSection.className = 'questions-section';
+  card.appendChild(questionsSection);
+
+  questionsToggle.addEventListener('click', () => {
+    const isOpen = questionsSection.classList.contains('open');
+    questionsSection.classList.toggle('open', !isOpen);
+    questionsToggle.classList.toggle('open', !isOpen);
+    questionsToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Accordion
+  const ul = document.createElement('ul');
+  ul.className = 'accordion-list';
+
+  person.questions.forEach((item, qIndex) => {
+    const li = document.createElement('li');
+    li.className = 'accordion-item';
+
+    const btn = document.createElement('button');
+    btn.className = 'accordion-trigger';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = `<span>${item.q}</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>`;
+
+    const panel = document.createElement('div');
+    panel.className = 'accordion-panel';
+    panel.setAttribute('role', 'region');
+
+    const inner = document.createElement('div');
+    inner.className = 'panel-inner';
+
+    // Audio section
+    const audioSection = document.createElement('div');
+    audioSection.className = 'audio-section';
+    audioSection.innerHTML = `<span class="audio-label">Audio Response</span>`;
+
+    const audioEl = document.createElement('audio');
+    audioEl.src = item.audio;
+    audioEl.preload = 'none';
+
+    const playerDiv = document.createElement('div');
+    playerDiv.className = 'custom-player';
+
+    const playBtn = document.createElement('button');
+    playBtn.className = 'play-btn';
+    playBtn.setAttribute('aria-label', 'Play');
+    playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+
+    const trackDiv = document.createElement('div');
+    trackDiv.className = 'player-track';
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'progress-bar-wrap';
+    const progressFill = document.createElement('div');
+    progressFill.className = 'progress-bar-fill';
+    progressWrap.appendChild(progressFill);
+    const times = document.createElement('div');
+    times.className = 'player-times';
+    times.innerHTML = `<span class="current-time">0:00</span><span class="duration-time">0:00</span>`;
+    trackDiv.appendChild(progressWrap);
+    trackDiv.appendChild(times);
+
+    playerDiv.appendChild(playBtn);
+    playerDiv.appendChild(trackDiv);
+
+    // Player logic
+    let isPlaying = false;
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audioEl.pause();
+      } else {
+        // Pause all others
+        document.querySelectorAll('audio').forEach(a => { if (a !== audioEl) a.pause(); });
+        document.querySelectorAll('.play-btn').forEach(b => {
+          if (b !== playBtn) b.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+        });
+        audioEl.play().catch(() => {});
+      }
+    });
+
+    audioEl.addEventListener('play', () => {
+      isPlaying = true;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+    });
+    audioEl.addEventListener('pause', () => {
+      isPlaying = false;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+    });
+    audioEl.addEventListener('ended', () => {
+      isPlaying = false;
+      playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+      progressFill.style.width = '0%';
+      times.querySelector('.current-time').textContent = '0:00';
+    });
+    audioEl.addEventListener('timeupdate', () => {
+      if (audioEl.duration) {
+        const pct = (audioEl.currentTime / audioEl.duration) * 100;
+        progressFill.style.width = pct + '%';
+        times.querySelector('.current-time').textContent = formatTime(audioEl.currentTime);
+      }
+    });
+    audioEl.addEventListener('loadedmetadata', () => {
+      times.querySelector('.duration-time').textContent = formatTime(audioEl.duration);
+    });
+    progressWrap.addEventListener('click', (e) => {
+      if (audioEl.duration) {
+        const rect = progressWrap.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        audioEl.currentTime = ratio * audioEl.duration;
+      }
+    });
+
+    const noteDiv = document.createElement('p');
+    noteDiv.className = 'no-audio-note';
+
+
+    audioSection.appendChild(playerDiv);
+    audioSection.appendChild(noteDiv);
+
+    // Transcript section
+    // Transcript (collapsible)
+    const transcriptToggle = document.createElement('button');
+    transcriptToggle.className = 'transcript-toggle';
+    transcriptToggle.setAttribute('aria-expanded', 'false');
+    transcriptToggle.innerHTML = `<span>Transcript</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>`;
+
+    const transcriptBody = document.createElement('div');
+    transcriptBody.className = 'transcript-body';
+    transcriptBody.innerHTML = `<p class="transcript-text">${item.transcript}</p>`;
+
+    transcriptToggle.addEventListener('click', () => {
+      const isOpen = transcriptBody.classList.contains('open');
+      transcriptBody.classList.toggle('open', !isOpen);
+      transcriptToggle.classList.toggle('open', !isOpen);
+      transcriptToggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    inner.appendChild(audioSection);
+    inner.appendChild(audioEl);
+    inner.appendChild(transcriptToggle);
+    inner.appendChild(transcriptBody);
+    panel.appendChild(inner);
+
+    // Toggle
+    btn.addEventListener('click', () => {
+      const isOpen = panel.classList.contains('open');
+      // Close all in this card
+      ul.querySelectorAll('.accordion-panel.open').forEach(p => {
+        p.classList.remove('open');
+        p.previousElementSibling.classList.remove('open');
+        p.previousElementSibling.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    li.appendChild(btn);
+    li.appendChild(panel);
+    ul.appendChild(li);
+  });
+
+  questionsSection.appendChild(ul);
+  return card;
+}
+
+const featuredPerson = {
+  name: "Stephen Monroe & Andrew Davis",
+  role: "Editors",
+  avatarUrl: "images/editors.png",
+  audio: "audio/intro.mp3",
+  transcript: "Andrew: I'm Andrew Davis. <br><br>Stephen: And I'm Steven Monroe. <br><br>Andrew: And we're the editors of this feature. <br><br>Stephen: What follows is the portrait of one department of writing and rhetoric in November 2025 during the ongoing early rise of generative AI. Our department at the University of Mississippi began grappling early in the 2022. By 2023, we had held our first AI institute for faculty from across our university. Since then, like every other department, we've been tussling with the constant changes. Here, we've benefited from our own homegrown experts, people like Mark Watkins, the first interview below. <br><br>Andrew: In our second interview, conducted in late twenty twenty five, Bob Cummings declares that he is long on human writing: 'I think that the value of human writing is on the rise, and that what we teach as a means of creating knowledge, of self discovery, is more valuable than it was ten years ago and will be more valuable ten years from now.' We agree with Bob, as did the other writing teachers interviewed for this feature. What follows is a realistic and optimistic collage of informed opinions, a portrait of one department seeking balance during the dizzying rise of generative AI. <br><br>Stephen: Everyone interviewed, as well as the editors writing this introduction, teaches first year writing at the University of Mississippi. Each occupies a different position and career stage. Bob is a full professor, a founder of our department, a former WPA, and a current central administrator at our university. Sarah, on the other hand, is a graduate student who is teaching composition for the very first time when interviewed. The rest of us are somewhere in between. <br><br>Andrew: We suggest listening to these diverse interviews, which total about eighty minutes in a single setting or two. We also hope that you will share them with your students and colleagues. While conducting and editing the interviews, we learned much about how compassionate educators are incorporating and or resisting the astonishing new technology of generative AI. We also learned about the emotional toil of adjusting to this new, unsummoned pedagogical reality, and about the hopes and fears of these seven conscientious teachers. <br><br>Stephen: We hope that the readers of Kairos will find both comfort and provocation in these interviews. As educators who care about human writing, we are all in this together, but we do not yet have the right answers. Our field, perhaps more than any other in education, must form new theories, pedagogies, and best practices to account for the arrival of generative AI. <br><br>Andrew: We are long on human writing. We know its power and centrality to human learning and development. The bad news: we don't yet know how best to engage with these new machines which have entered our linguistic territory, and are engaging tirelessly with our students. The good news: as human scholars and teachers of rhetoric and composition, in departments and writing centers across the globe, we can and will figure it out together"
+};
+
+function buildFeaturedCard(person) {
+  const card = document.createElement('article');
+  card.className = 'featured-card';
+
+  // Avatar
+  const avatarWrap = document.createElement('div');
+  avatarWrap.className = 'featured-avatar-wrap';
+  const img = document.createElement('img');
+  img.className = 'featured-avatar';
+  img.src = person.avatarUrl;
+  img.alt = person.name;
+  avatarWrap.appendChild(img);
+  card.appendChild(avatarWrap);
+
+  // Body
+  const body = document.createElement('div');
+  body.className = 'featured-body';
+
+  const top = document.createElement('div');
+  top.className = 'featured-top';
+  top.innerHTML = `<div class="featured-name">${person.name}</div><div class="featured-role">${person.role}</div>`;
+  body.appendChild(top);
+
+  const content = document.createElement('div');
+  content.className = 'featured-content';
+
+  // Audio
+  const audioSection = document.createElement('div');
+  audioSection.className = 'featured-audio-section';
+  audioSection.innerHTML = `<span class="audio-label">Audio Introduction</span>`;
+
+  const audioEl = document.createElement('audio');
+  audioEl.src = person.audio;
+  audioEl.preload = 'none';
+
+  const playerDiv = document.createElement('div');
+  playerDiv.className = 'custom-player';
+
+  const playBtn = document.createElement('button');
+  playBtn.className = 'play-btn';
+  playBtn.setAttribute('aria-label', 'Play');
+  playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+
+  const trackDiv = document.createElement('div');
+  trackDiv.className = 'player-track';
+  const progressWrap = document.createElement('div');
+  progressWrap.className = 'progress-bar-wrap';
+  const progressFill = document.createElement('div');
+  progressFill.className = 'progress-bar-fill';
+  progressWrap.appendChild(progressFill);
+  const times = document.createElement('div');
+  times.className = 'player-times';
+  times.innerHTML = `<span class="current-time">0:00</span><span class="duration-time">0:00</span>`;
+  trackDiv.appendChild(progressWrap);
+  trackDiv.appendChild(times);
+  playerDiv.appendChild(playBtn);
+  playerDiv.appendChild(trackDiv);
+
+  let isPlaying = false;
+  playBtn.addEventListener('click', () => {
+    if (isPlaying) { audioEl.pause(); }
+    else {
+      document.querySelectorAll('audio').forEach(a => { if (a !== audioEl) a.pause(); });
+      document.querySelectorAll('.play-btn').forEach(b => { if (b !== playBtn) b.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`; });
+      audioEl.play().catch(() => {});
+    }
+  });
+  audioEl.addEventListener('play', () => { isPlaying = true; playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`; });
+  audioEl.addEventListener('pause', () => { isPlaying = false; playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`; });
+  audioEl.addEventListener('ended', () => { isPlaying = false; playBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`; progressFill.style.width = '0%'; times.querySelector('.current-time').textContent = '0:00'; });
+  audioEl.addEventListener('timeupdate', () => { if (audioEl.duration) { progressFill.style.width = (audioEl.currentTime / audioEl.duration * 100) + '%'; times.querySelector('.current-time').textContent = formatTime(audioEl.currentTime); } });
+  audioEl.addEventListener('loadedmetadata', () => { times.querySelector('.duration-time').textContent = formatTime(audioEl.duration); });
+  progressWrap.addEventListener('click', (e) => { if (audioEl.duration) { const rect = progressWrap.getBoundingClientRect(); audioEl.currentTime = ((e.clientX - rect.left) / rect.width) * audioEl.duration; } });
+
+  audioSection.appendChild(playerDiv);
+  audioSection.appendChild(audioEl);
+  content.appendChild(audioSection);
+
+  // Transcript
+  // Transcript (collapsible)
+  const transcriptToggle = document.createElement('button');
+  transcriptToggle.className = 'featured-transcript-toggle';
+  transcriptToggle.setAttribute('aria-expanded', 'false');
+  transcriptToggle.innerHTML = `<span>Transcript</span>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>`;
+
+  const transcriptBody = document.createElement('div');
+  transcriptBody.className = 'featured-transcript-body';
+  transcriptBody.innerHTML = `<p class="featured-transcript-text">${person.transcript}</p>`;
+
+  transcriptToggle.addEventListener('click', () => {
+    const isOpen = transcriptBody.classList.contains('open');
+    transcriptBody.classList.toggle('open', !isOpen);
+    transcriptToggle.classList.toggle('open', !isOpen);
+    transcriptToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  content.appendChild(transcriptToggle);
+  content.appendChild(transcriptBody);
+
+  body.appendChild(content);
+  card.appendChild(body);
+  return card;
+}
+
+document.getElementById('featured-wrap').appendChild(buildFeaturedCard(featuredPerson));
+
+const grid = document.getElementById('grid');
+people.forEach((p, i) => grid.appendChild(buildCard(p, i)));
+</script>
+<footer>
+  <p align="center" style="font-size: 1.2em; color: #555;">Parts of this webtext were created with the assistance of Anthropic's Claude Sonnet 4.6.</p>
+</footer>
+</body>
+</html>
