@@ -580,14 +580,10 @@ header::after {
 }
 
 /* POSTSCRIPT */
-postscript {
-  text-align: justify;
-  padding: 48px 24px 36px;
-  position: relative;
-}
-
 .postscript {
-  margin-top: 1px;
+  text-align: justify;
+  padding: 0 24px 36px;
+  position: relative;
   font-size: 16px;
   color: var(--muted);
   font-weight: 300;
@@ -595,6 +591,15 @@ postscript {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.65;
+}
+
+.postscript::before {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 2px;
+  background: var(--amber);
+  margin: 0 auto 32px;
 }
 
 /* FOOTER */
